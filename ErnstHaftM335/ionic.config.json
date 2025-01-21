@@ -1,0 +1,7 @@
+{
+  "name": "ErnstHaftM335",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
