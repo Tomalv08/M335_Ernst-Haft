@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Schnitzeljagd
-    </ion-title>
+    <ion-title>Schnitzeljagd</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,6 +19,7 @@
       <ion-label>Mega Man X</ion-label>
     </ion-item>
   </ion-list>
-  <ion-button>Schnitzeljagd starten</ion-button>
+  <ion-button (click)="navigateToTask()">Schnitzeljagd starten</ion-button>
+
 
 </ion-content>
