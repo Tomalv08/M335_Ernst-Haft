@@ -1,18 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Schnitzeljagd</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Schnitzeljagd</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-    <div class="task-page">
-        <app-task [taskDescription]="currentTask"></app-task>
-        <button (click)="nextTask()" class="next-button">Weiter</button>
+    <!-- Dynamically render each task component -->
+    <div class="task-container">
+        <app-task1 *ngIf="currentTaskIndex === 0"></app-task1>
+        <app-task2 *ngIf="currentTaskIndex === 1"></app-task2>
+        <app-task3 *ngIf="currentTaskIndex === 2"></app-task3>
+        <app-task4 *ngIf="currentTaskIndex === 3"></app-task4>
     </div>
 
-
-    <!-- Button for navigating to another route -->
-  <ion-button (click)="navigateToTask()">Abbrechen</ion-button>
+    <!-- Navigation Buttons -->
+    <ion-footer>
+        <ion-toolbar>
+            <ion-button expand="full" (click)="nextTask()">Weiter</ion-button>
+        </ion-toolbar>
+    </ion-footer>
 </ion-content>
-
