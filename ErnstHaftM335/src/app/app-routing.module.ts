@@ -11,6 +11,11 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'berechtigung',
+    loadChildren: () => import('./pages/berechtigung/berechtigung.module').then(m => m.BerechtigungPageModule)
+  },
+
 ];
 
 @NgModule({
