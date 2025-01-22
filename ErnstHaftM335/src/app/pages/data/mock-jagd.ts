@@ -10,7 +10,7 @@
 export const JAGDS: Jagd[] = [
   {
     id: 1,
-    name: "City Adventure",
+    name: "Jason",
     time: "02:30",
     date: "2023-12-15",
     tasks_done: 3,
@@ -18,7 +18,7 @@ export const JAGDS: Jagd[] = [
   },
   {
     id: 2,
-    name: "Treasure Hunt in the Park",
+    name: "Arni",
     time: "01:45",
     date: "2024-01-10",
     tasks_done: 5,
@@ -26,7 +26,7 @@ export const JAGDS: Jagd[] = [
   },
   {
     id: 3,
-    name: "Historic Landmarks Challenge",
+    name: "Malik",
     time: "03:15",
     date: "2024-02-05",
     tasks_done: 7,
@@ -34,7 +34,7 @@ export const JAGDS: Jagd[] = [
   },
   {
     id: 4,
-    name: "Team Challenge Downtown",
+    name: "Raji",
     time: "01:20",
     date: "2024-03-12",
     tasks_done: 2,
@@ -42,7 +42,7 @@ export const JAGDS: Jagd[] = [
   },
   {
     id: 5,
-    name: "Mystery Night Walk",
+    name: "ionicky",
     time: "02:00",
     date: "2024-04-22",
     tasks_done: 4,

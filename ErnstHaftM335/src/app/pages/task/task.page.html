@@ -5,10 +5,14 @@
 </ion-header>
 
 <ion-content>
-  <p>Your tasks will be displayed here.</p>
-  <p>Your tasks will be displayed here.</p>
 
-  <!-- Button for navigating to another route -->
+    <div class="task-page">
+        <app-task [taskDescription]="currentTask"></app-task>
+        <button (click)="nextTask()" class="next-button">Weiter</button>
+    </div>
+
+
+    <!-- Button for navigating to another route -->
   <ion-button (click)="navigateToTask()">Abbrechen</ion-button>
 </ion-content>
 
