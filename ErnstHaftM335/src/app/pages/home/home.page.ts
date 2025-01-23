@@ -33,4 +33,10 @@ export class HomePage {
   navigateToTask() {
     this.router.navigate(['/task']);
   }
+  navigateToBerechtigung() {
+    this.router.navigate(['/berechtigung']);
+  }
+  navigateToName() {
+    this.router.navigate(['/name']);
+  }
 }
