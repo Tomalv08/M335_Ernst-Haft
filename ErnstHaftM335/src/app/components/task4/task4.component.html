@@ -1,25 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Device Battery Info</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="task-section">
+  <h2>Aufgabe: Gerät aufladen</h2>
 
-<ion-content>
   <div *ngIf="!isCharging">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Connect to Charger</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-button (click)="connectToCharger()">Connect</ion-button>
-      </ion-card-content>
-    </ion-card>
+    <p>Bitte verbinden Sie das Gerät mit dem Ladegerät.</p>
+    <ion-img src="./assets/connect-charger.jpeg" alt="Ladegerät verbinden"></ion-img>
   </div>
-  <div *ngIf="isCharging">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Battery is Charging</ion-card-title>
-      </ion-card-header>
-    </ion-card>
+
+  <div *ngIf="isCharging" class="success-message">
+    <p class="success">Das Gerät wird aufgeladen!</p>
+    <ion-img src="./assets/charging.webp" alt="Gerät wird aufgeladen"></ion-img>
   </div>
-</ion-content>
+
+  <!-- Button to move to next task; enabled only when charging -->
+  <ion-button
+    expand="full"
+    color="success"
+    [disabled]="!isCharging"
+    (click)="moveToNextTask()">Weiter</ion-button>
+</div>

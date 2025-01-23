@@ -1,19 +1,9 @@
 <div class="task-section">
   <h2>Aufgabe 2</h2>
   <p>Laufe 10 Meter!</p>
-
-  <!-- Show remaining distance if distance is less than goalDistance
-  *ngIf="distance !== null && distance < goalDistance"
-  -->
   <p >
     Verbleibende Distanz: {{(goalDistance - (distance || 0)) | number: '1.0-2'}} m
   </p>
-
-  <!-- Show success message when distance is greater than or equal to goalDistance
-  <p *ngIf="distance !== null && distance >= goalDistance" class="success">
-    Du hast das Ziel erreicht!
-  </p>
--->
   <ion-img src="./assets/image1.jpeg" alt="Laufen"></ion-img>
 
   <!-- Show success message and an image when task is complete -->

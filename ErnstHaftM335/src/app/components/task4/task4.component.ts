@@ -7,7 +7,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
-  IonHeader,
+  IonHeader, IonImg,
   IonTitle,
   IonToolbar
 } from "@ionic/angular/standalone";
@@ -25,12 +25,13 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonButton
+    IonButton,
+    IonImg
   ]
 })
 export class Task4Component implements OnInit {
   @Input() moveToNextTask!: () => void;
-  isCharging: boolean = false;
+  isCharging: boolean | undefined = false;
 
   constructor(private alertController: AlertController) { }
 
@@ -39,16 +40,22 @@ export class Task4Component implements OnInit {
   }
 
   async checkBatteryStatus() {
-    const info = await Device.getBatteryInfo();
-    this.isCharging = info.isCharging ?? false;
+    // Check battery status every 5 seconds
+    const intervalId = setInterval(async () => {
+      const info = await Device.getBatteryInfo();
+      this.isCharging = info.isCharging;
+
+      if (this.isCharging) {
+        clearInterval(intervalId); // Stop checking once charging is detected
+        this.showSuccessAlert(); // Show success alert
+      }
+    }, 5000); // Adjust the interval as needed
   }
 
-  async connectToCharger() {
-    // Simulate connecting to a charger
-    this.isCharging = true;
+  async showSuccessAlert() {
     const alert = await this.alertController.create({
-      header: 'Task Completed',
-      message: 'You have successfully connected to the charger.',
+      header: 'Aufgabe abgeschlossen',
+      message: 'Das Gerät wird jetzt aufgeladen.',
       buttons: ['OK']
     });
 
