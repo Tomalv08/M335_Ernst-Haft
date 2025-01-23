@@ -10,6 +10,15 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },  {
+    path: 'task',
+    loadChildren: () => import('./pages/task/task.module').then( m => m.TaskPageModule)
+  },
+<<<<<<< HEAD
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: 'berechtigung',
@@ -20,6 +29,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/name-eingeben/name-eingeben.module').then(m => m.NameEingebenPageModule)
   },
 
+
+];
+=======
+>>>>>>> 7bd930e8ce6c9c6276f5fa6d8e49624518c7d109
 
 ];
 

@@ -1,26 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Schnitzeljagd
-    </ion-title>
+    <ion-title>Schnitzeljagd</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-img  src="../assets/schnitzel.webp"  alt="Schnitzeljagd"></ion-img>
+  <ion-img
+    src="../assets/schnitzel.webp"
+    alt="Schnitzeljagd"
+    style="height: 300px; margin:20px"
+  ></ion-img>
+
 
   <ion-list [inset]="true">
     <ion-list-header>
       <ion-label>Leaderboard</ion-label>
     </ion-list-header>
 
-    <ion-item>
-      <ion-label>Pokémon Yellow</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Mega Man X</ion-label>
+    <ion-item *ngFor="let jagd of jagds; let i = index">
+      <ion-label>
+        <h2>{{ i + 1 }}. Schnitzeljagd - {{ jagd.name }}</h2>
+        <p>Tasks Completed: {{ jagd.tasks_done }} / {{ jagd.tasks_long }}</p>
+        <p>Date: {{ jagd.date }}</p>
+        <p>Time: {{ jagd.time }}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
-  <ion-button>Schnitzeljagd starten</ion-button>
 
+  <ion-button expand="full" (click)="navigateToTask()">Schnitzeljagd starten</ion-button>
 </ion-content>
