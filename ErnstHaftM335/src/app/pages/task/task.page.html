@@ -5,14 +5,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Fixed Top Section -->
   <div class="top-section">
-    <div class="name">Jason</div>
-    <div class="time">{{ timerDisplay }}</div> <!-- Timer -->
+    <div class="name">{{ playerName }}</div> <!-- Zeigt den Namen des Spielers an -->
+    <div class="time">{{ timerDisplay }}</div> <!-- Zeigt den Timer an -->
+    <div class="max-time">
+      Max. Zeit für diese Aufgabe: {{ tasks[currentTaskIndex]?.max_time }} Sekunden
+    </div>
     <button class="cancel" ion-button (click)="cancelGame()">Abbrechen</button>
   </div>
 
-  <!-- Dynamically render each task component -->
   <div class="task-container">
     <app-task1
       *ngIf="currentTaskIndex === 0"
