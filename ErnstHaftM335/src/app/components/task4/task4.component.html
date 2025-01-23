@@ -1,3 +1,25 @@
-<p>
-  task4 works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Device Battery Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!isCharging">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Connect to Charger</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button (click)="connectToCharger()">Connect</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf="isCharging">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Battery is Charging</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content>
