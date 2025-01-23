@@ -73,11 +73,10 @@ export class TaskPage implements OnInit, OnDestroy {
   }
 
   // Navigate to the next task
-  nextTask(): void {
-    if (this.currentTaskIndex < this.tasks.length - 1) {
+  // Move to the next task
+  moveToNextTask(): void {
+    if (this.currentTaskIndex < 3) {
       this.currentTaskIndex++;
-    } else {
-      this.endGame();
     }
   }
 
