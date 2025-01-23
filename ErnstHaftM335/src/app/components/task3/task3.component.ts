@@ -25,4 +25,7 @@ export class Task3Component  implements OnInit {
 
   ngOnInit() {}
 
+  onTaskComplete() {
+
+  }
 }
