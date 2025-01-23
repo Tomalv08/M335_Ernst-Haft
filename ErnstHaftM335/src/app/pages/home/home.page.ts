@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { JAGDS } from '../data/mock-jagd';
 import { Jagd } from '../data/mock-jagd';
@@ -10,32 +10,55 @@ import { Jagd } from '../data/mock-jagd';
   standalone: false,
 })
 
-
-export class HomePage {
+export class HomePage implements OnInit {
   jagds: Jagd[] = JAGDS;
 
-  constructor(private router: Router) {
-    // Sort jagds by time after the component is initialized
+  constructor(private router: Router) {}
+
+  ngOnInit() {
     this.sortJagdsByTime();
+    this.addPlayerToLeaderboard();
   }
 
-  // Function to convert time (HH:MM) into total minutes
   private timeToMinutes(time: string): number {
-    const [hours, minutes] = time.split(":").map(Number);
+    const [hours, minutes] = time.split(':').map(Number);
     return hours * 60 + minutes;
   }
 
-  // Sort jagds by time in ascending order
   private sortJagdsByTime() {
-    this.jagds.sort((a, b) => this.timeToMinutes(a.time) - this.timeToMinutes(b.time));
+    this.jagds.sort(
+      (a, b) => this.timeToMinutes(a.time) - this.timeToMinutes(b.time)
+    );
   }
+
+  private addPlayerToLeaderboard() {
+    const playerName = localStorage.getItem('playerName');
+    console.log('Gefundener Name im Storage:', playerName); // Debug
+
+    if (playerName) {
+      const newJagd: Jagd = {
+        id: this.jagds.length + 1,
+        name: playerName,
+        time: '00:00',
+        date: new Date().toISOString().split('T')[0],
+        tasks_done: 0,
+        tasks_long: 10,
+      };
+      this.jagds = [...this.jagds, newJagd]; // Array neu zuweisen
+      console.log('Aktualisiertes Leaderboard:', this.jagds); // Debug
+      this.sortJagdsByTime();
+    }
+  }
+
 
   navigateToTask() {
     this.router.navigate(['/task']);
   }
+
   navigateToBerechtigung() {
     this.router.navigate(['/berechtigung']);
   }
+
   navigateToName() {
     this.router.navigate(['/name']);
   }

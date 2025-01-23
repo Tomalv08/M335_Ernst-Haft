@@ -37,31 +37,33 @@ import {RouterLink} from "@angular/router";
   ]
 })
 export class BerechtigungPage implements OnInit {
+  constructor(private alertController: AlertController) {}
 
-  constructor(private alertController: AlertController) { }
+  ngOnInit() {}
 
-  ngOnInit() { }
-
-  // Kamera-Berechtigung prüfen und anfordern
   async handleCameraPermission() {
+    // Check camera permissions
     const permissions = await Camera.checkPermissions();
+
     if (permissions.camera !== 'granted') {
+      // Request permissions using native Android pop-up
       const request = await Camera.requestPermissions({ permissions: ['camera'] });
+
       if (request.camera !== 'granted') {
-        return; // Wenn die Berechtigung nicht erteilt wird, passiert nichts
+        console.error('Kamerazugriff nicht erteilt');
+        return; // Exit if permission is denied
       }
     }
-    // Wenn die Berechtigung erteilt ist, zeige den Alert
+
+    // Wenn Berechtigung erteilt wurde, Benachrichtigung anzeigen
     await this.showAlert();
   }
 
-
-  // Benachrichtigung anzeigen
   async showAlert() {
     const alert = await this.alertController.create({
-      header: "Zugriffsbestätigung",
-      message:"Du hast nun erfolgreich Zugriff auf die Kamera erteilt. Die App kann jetzt die Kamera verwenden, um Aufgaben zu erfüllen.",
-      buttons: ['OK']
+      header: 'Zugriffsbestätigung',
+      message: 'Du hast die Kamera-Berechtigung erteilt!',
+      buttons: ['OK'],
     });
     await alert.present();
   }
