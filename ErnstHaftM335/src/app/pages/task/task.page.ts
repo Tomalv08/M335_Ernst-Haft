@@ -28,27 +28,28 @@ import { Task } from '../data/mock-task';
 })
 export class TaskPage implements OnInit, OnDestroy {
   constructor(private router: Router) {}
+
   currentTaskIndex: number = 0;
   tasks: Task[] = TASKS;
-  startTime: number | null = null; // Zeit, wenn das Spiel beginnt
-  taskStartTime: number | null = null; // Startzeit für jede Aufgabe
-  timerDisplay: string = '0:00'; // Anzeige der verstrichenen Zeit
-  timerInterval: any = null; // Referenz auf den Timer
-  totalTime: number = 0; // Gesamtzeit für alle Aufgaben
-  rewards: string[] = []; // Belohnungen für jede Aufgabe
-  playerName: string = ''; // Variable for storing the player's name
+  startTime: number | null = null; // Start time of the game
+  taskStartTime: number | null = null; // Start time of the current task
+  timerDisplay: string = '0:00';
+  timerInterval: any = null;
+  totalTime: number = 0; // Total time elapsed
+  rewards: string[] = [];
+  playerName: string = '';
 
   ngOnInit(): void {
     this.startGame();
   }
 
   ngOnDestroy(): void {
-    this.stopTimer(); // Timer stoppen, wenn die Komponente zerstört wird
+    this.stopTimer();
   }
 
   startGame(): void {
-    this.startTime = Date.now(); // Startzeit des Spiels
-    this.taskStartTime = Date.now(); // Startzeit der ersten Aufgabe
+    this.startTime = Date.now();
+    this.taskStartTime = Date.now();
     this.timerInterval = setInterval(() => {
       this.updateTimerDisplay();
     }, 1000);
@@ -56,7 +57,7 @@ export class TaskPage implements OnInit, OnDestroy {
 
   updateTimerDisplay(): void {
     if (this.startTime) {
-      const elapsedTime = Math.floor((Date.now() - this.taskStartTime!) / 1000); // Zeit für die aktuelle Aufgabe
+      const elapsedTime = Math.floor((Date.now() - this.startTime) / 1000); // Total game time
       const minutes = Math.floor(elapsedTime / 60);
       const seconds = elapsedTime % 60;
       this.timerDisplay = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -72,24 +73,21 @@ export class TaskPage implements OnInit, OnDestroy {
 
   moveToNextTask(): void {
     if (this.currentTaskIndex < this.tasks.length) {
-      // Berechne die Zeit für die aktuelle Aufgabe
       const taskEndTime = Date.now();
-      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000);
-      this.totalTime += taskDuration; // Addiere zur Gesamtzeit
+      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000); // Task-specific time
+      this.totalTime += taskDuration;
 
-      // Belohnung und Bestrafung je nach Aufgabe
       const currentTask = this.tasks[this.currentTaskIndex];
       if (taskDuration > currentTask.max_time) {
-        this.rewards.push('🍺'); // Bestrafung (zu lange gebraucht)
+        this.rewards.push('🍺'); // Too slow
       } else {
-        this.rewards.push('🍉'); // Belohnung (rechtzeitig geschafft)
+        this.rewards.push('🍉'); // On time
       }
 
       this.currentTaskIndex++;
 
-      // Setze den Timer für die nächste Aufgabe zurück
       if (this.currentTaskIndex < this.tasks.length) {
-        this.taskStartTime = Date.now(); // Startzeit für die nächste Aufgabe
+        this.taskStartTime = Date.now(); // Reset for the next task
       } else {
         this.endGame();
       }
@@ -97,23 +95,35 @@ export class TaskPage implements OnInit, OnDestroy {
   }
 
   endGame(): void {
-    this.stopTimer(); // Timer stoppen
-
-    // Gesamtzeit speichern
+    this.stopTimer();
     const totalMinutes = Math.floor(this.totalTime / 60);
     const totalSeconds = this.totalTime % 60;
     const formattedTotalTime = `${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
 
-    // Gesamtzeit und Score (Emojis) in localStorage speichern
-    localStorage.setItem('gameTime', formattedTotalTime);
-    localStorage.setItem('score', JSON.stringify(this.rewards));
+    const playerName = this.playerName || 'Player'; // Default name if none is set
+    const currentResult = {
+      name: playerName,
+      score: this.rewards,
+      date: new Date().toLocaleDateString(),
+      gameTime: formattedTotalTime,
+    };
 
-    // Navigiere zur Endseite
+    // Retrieve the existing leaderboard from localStorage
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '[]');
+
+    // Add the current result to the leaderboard
+    leaderboard.push(currentResult);
+
+    // Save the updated leaderboard back to localStorage
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+
+    // Navigate to the leaderboard page
     this.router.navigate(['/endpage']);
   }
 
+
   cancelGame(): void {
-    this.stopTimer(); // Timer stoppen, wenn das Spiel abgebrochen wird
+    this.stopTimer();
     this.router.navigate(['/home']);
   }
 }

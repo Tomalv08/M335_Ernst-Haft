@@ -15,15 +15,15 @@ export const TASKS: Task[] = [
     description: "Laufe zum Ping Pong Tisch",
     distance: 100,
     pic: "picture",
-    max_time: 20 // max time in seconds
+    max_time: 50 // max time in seconds
   },
   {
     id: 2,
     name: "Geolocation",
-    description: "Finde den richtigen Standort",
+    description: "Lauf 10 meter",
     distance: 200,
     pic: "picture",
-    max_time: 30 // max time in seconds
+    max_time: 20 // max time in seconds
   },
   {
     id: 3,

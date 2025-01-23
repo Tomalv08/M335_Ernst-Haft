@@ -1,19 +1,12 @@
 <ion-card class="task-box">
   <ion-card-header>
-    <ion-card-title>Aufgabe 3</ion-card-title>
+    <ion-card-title>Mission 3: QR-Code Entschlüsseln!</ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <p>
-      Scanne den QR-Code mit der Kamera deines Geräts und vergleiche den Inhalt
-      mit dem vorgegebenen Text. Die Aufgabe gilt als erledigt, wenn der
-      gescannte QR-Code mit dem richtigen Inhalt übereinstimmt.
+    <p class="task-description">
+      Scanne den QR-Code mit deiner Kamera und überprüfe, ob der Inhalt mit dem vorgegebenen Text übereinstimmt.
+      <strong>Nur wenn der Code passt, ist die Aufgabe geschafft!</strong>
     </p>
-    <ion-button expand="block" class="camera-button" (click)="checkTheQrCode()">Kamera öffnen</ion-button>
+    <ion-button expand="block" class="camera-button" (click)="checkTheQrCode()">📷 Kamera öffnen</ion-button>
   </ion-card-content>
-  <ion-button
-    expand="full"
-    color="success"
-    (click)="moveToNextTask()">Weiter</ion-button>
 </ion-card>
-
-<!-- [disabled]="this.scanResult.ScanResult === 'M335@ICT-BZ'" -->

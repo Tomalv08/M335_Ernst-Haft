@@ -1,32 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Device } from '@capacitor/device';
 import { Haptics } from '@capacitor/haptics';
 import { AlertController } from '@ionic/angular';
-import {
-  IonButton,
-  IonCard, IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonContent,
-  IonHeader, IonImg,
-  IonTitle,
-  IonToolbar
-} from "@ionic/angular/standalone";
+import {IonImg} from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-task4',
   templateUrl: './task4.component.html',
   styleUrls: ['./task4.component.scss'],
   imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
-    IonButton,
     IonImg
   ]
 })
@@ -34,7 +17,7 @@ export class Task4Component implements OnInit {
   @Input() moveToNextTask!: () => void;
   isCharging: boolean = false;
 
-  constructor(private alertController: AlertController) { }
+  constructor(private alertController: AlertController, private router: Router) { }
 
   ngOnInit() {
     this.checkBatteryStatus();
@@ -51,7 +34,9 @@ export class Task4Component implements OnInit {
       }
     }, 5000);
   }
-
+  navigateToEnd() {
+    this.router.navigate(['/endpage']);
+  }
   async showSuccessAlert() {
     // Trigger vibration
     await this.hapticsVibrate();
@@ -61,9 +46,9 @@ export class Task4Component implements OnInit {
       message: 'Das Gerät wird jetzt aufgeladen.',
       buttons: [
         {
-          text: 'Weiter',
+          text: 'Abschliessen',
           handler: () => {
-            this.moveToNextTask(); // Go to the next task
+            this.navigateToEnd(); // Go to the next task
           }
         }
       ]

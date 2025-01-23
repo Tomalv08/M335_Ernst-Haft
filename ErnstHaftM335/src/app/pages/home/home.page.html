@@ -11,7 +11,6 @@
     style="height: 300px; margin:20px"
   ></ion-img>
 
-
   <ion-list [inset]="true">
     <ion-list-header>
       <ion-label>Leaderboard</ion-label>
@@ -20,16 +19,12 @@
     <ion-item *ngFor="let jagd of jagds; let i = index">
       <ion-label>
         <h2>{{ i + 1 }}. Schnitzeljagd - {{ jagd.name }}</h2>
-        <p>Tasks Completed: {{ jagd.tasks_done }} / {{ jagd.tasks_long }}</p>
+        <p>Score: {{ jagd.score.join(' ') }}</p>
         <p>Date: {{ jagd.date }}</p>
-        <p>Time: {{ jagd.time }}</p>
+        <p>Time: {{ jagd.gameTime }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
 
-
   <ion-button expand="full" (click)="navigateToName()">Schnitzeljagd starten</ion-button>
-  <ion-button expand="full" (click)="navigateToTask()">Schnitzeljagd starten task 1</ion-button>
-  <ion-button expand="full" (click)="navigateToEnd()">End</ion-button>
-
 </ion-content>

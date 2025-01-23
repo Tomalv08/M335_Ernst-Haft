@@ -15,22 +15,27 @@ import {Router} from "@angular/router";
   ]
 })
 export class EndpagePage implements OnInit {
+  playerName: string = '';  // Stores the player's name
+  gameTime: string = '';   // Stores the total time of the game
+  score: string[] = [];    // Stores the score (emojis)
+  rewards: string[] = [];  // Stores the rewards (for display)
 
-  playerName: string = '';  // Diese Variable wird den Spielernamen speichern
-  gameTime: string = '';    // Diese Variable speichert die Gesamtzeit
-  score: string[] = [];     // Diese Variable speichert den Score (Emojis)
-  rewards: string[] = JSON.parse(localStorage.getItem('score') || '[]');
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // Abrufen der gespeicherten Daten aus localStorage
-    this.playerName = localStorage.getItem('playerName') || 'Unbekannt';  // Spielername wird aus localStorage geladen
-    this.gameTime = localStorage.getItem('gameTime') || '0:00';           // Gesamtzeit aus localStorage laden
-    this.score = JSON.parse(localStorage.getItem('score') || '[]');
-    console.log(this.rewards);// Score (Emojis) aus localStorage laden
+    // Retrieve the current game's data from localStorage
+    this.playerName = localStorage.getItem('playerName') || 'Unbekannt'; // Player name fallback to 'Unbekannt' if not set
+    this.gameTime = localStorage.getItem('gameTime') || 'x';            // Total time fallback to 'x' if not set
+    this.score = JSON.parse(localStorage.getItem('score') || '[]');     // Load score (emojis)
+    this.rewards = [...this.score]; // Copy score to rewards for display
+
+    // Log for debugging purposes
+    console.log('Player Name:', this.playerName);
+    console.log('Game Time:', this.gameTime);
+    console.log('Score:', this.score);
   }
 
   gotoHome() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home']); // Navigate back to the home page
   }
 }

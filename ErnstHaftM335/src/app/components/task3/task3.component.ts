@@ -18,7 +18,6 @@ import {IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle} from "@
     IonCardTitle,
     IonCardContent,
     IonButton,
-    // Add Ionic UI components here
   ]
 })
 export class Task3Component {
@@ -32,7 +31,6 @@ export class Task3Component {
 
   async checkTheQrCode(): Promise<void> {
     try {
-      // QR-Code scanning logic
       this.scanResult = await CapacitorBarcodeScanner.scanBarcode({
         hint: 0,
         scanInstructions: 'Halte die Kamera über den QR-Code',
@@ -44,17 +42,15 @@ export class Task3Component {
       });
 
       if (this.scanResult.ScanResult === 'M335@ICT-BZ') {
-        // Show success alert
         await this.showAlert('Erfolg', 'Die Aufgabe wurde erfolgreich abgeschlossen!', [
           {
-            text: 'Weiter',
+            text: 'Weitere Aufgabe',
             handler: () => {
-              console.log('Weiter gedrückt');
+              this.moveToNextTask();
             },
           },
         ]);
       } else {
-        // Show error alert
         await this.showAlert('Fehler', 'Der QR-Code ist falsch. Bitte erneut versuchen.', [
           {
             text: 'Erneut versuchen',
@@ -67,7 +63,6 @@ export class Task3Component {
     } catch (error) {
       console.error('Fehler beim Scannen:', error);
 
-      // Show scan error alert
       await this.showAlert('Scan-Fehler', 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.', [
         {
           text: 'OK',

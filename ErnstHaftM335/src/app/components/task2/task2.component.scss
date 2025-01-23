@@ -2,80 +2,75 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 50px;
-  background-color: #f9f9f9; // Light background for contrast
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background: linear-gradient(135deg, #eaf4fc, #ffffff); // Subtle blue gradient for a fresh look
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin: 20px;
-  max-width: 600px; // Limit the width to make the layout cleaner on larger screens
-  width: 100%; // Ensure the section takes full available width
+  overflow: hidden;
 
   h2 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #333; // Darker font for better readability
+    color: #0077b6; // Vibrant blue for the header
+    text-align: center;
   }
 
   p {
     font-size: 16px;
-    color: #555;
-    text-align: center;
-    margin: 5px 0;
     line-height: 1.5;
+    color: #333;
+    text-align: center;
+    margin: 8px 0;
 
-    &.distance {
+    &.distance-info {
       font-weight: bold;
-      color: #0070c0; // Highlighted text for distance
+      color: #ff6b6b; // Highlighted text for distance
+      font-size: 18px;
     }
 
     &.success {
-      color: green;
+      font-size: 20px;
       font-weight: bold;
-      font-size: 18px;
+      color: #2a9d8f; // Celebratory green for success message
+      margin-top: 15px;
+      text-align: center;
     }
   }
 
   ion-img {
-    width: 100%;
-    max-width: 200px;
+    width: 100%; // Responsive design
+    max-width: 240px; // Ensure images fit smaller devices
     height: auto;
     margin: 15px 0;
-    border-radius: 8px; // Rounded corners for the image
-    border: 1px solid #ddd; // Subtle border around the image
-    object-fit: cover;
-  }
+    border-radius: 12px; // Rounded corners for softer visuals
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); // Subtle depth effect
+    transition: transform 0.2s ease-in-out; // Hover effect for interactive feel
 
-  ion-button {
-    margin-top: 20px;
-    width: 100%; // Full width button
-    max-width: 300px;
-    font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    padding: 12px;
-    border-radius: 8px;
-
-    &.button-disabled {
-      background-color: #ccc; // Grey background when disabled
-      color: #666; // Grey text color when disabled
+    &:hover {
+      transform: scale(1.05); // Slight zoom on hover
     }
   }
 
   .success-message {
-    text-align: center;
-    margin: 20px 0;
-  }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #f4fdfb; // Soft green background for success
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-  // Responsiveness for smaller devices
-  @media screen and (max-width: 768px) {
-    padding: 30px;
-    max-width: 90%;
-  }
+    p {
+      margin-bottom: 10px;
+    }
 
-  @media screen and (max-width: 480px) {
-    padding: 20px;
-    max-width: 100%;
+    ion-img {
+      max-width: 200px;
+      border: none; // Remove border for the success image
+    }
   }
 }
