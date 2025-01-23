@@ -36,10 +36,15 @@
     </application>
 
     <!-- Permissions -->
+<<<<<<< HEAD
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+=======
   <!-- Geolocation API -->
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-feature android:name="android.hardware.location.gps" />
 
+>>>>>>> 7bd930e8ce6c9c6276f5fa6d8e49624518c7d109
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

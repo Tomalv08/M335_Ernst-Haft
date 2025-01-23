@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="header-title">Schnitzeljagd</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="form-container">
+    <div class="input-box">
+      <label for="name" class="input-label">Dein Name:</label>
+      <input
+        type="text"
+        id="name"
+        class="input-field"
+        [(ngModel)]="inputValue"
+      (input)="checkInput()"
+      />
+    </div>
+    <button class="confirm-button" [disabled]="isDisabled" routerLink="/home">Bestätigen</button>
+  </div>
+</ion-content>
