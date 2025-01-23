@@ -33,7 +33,7 @@
             <ion-card-content>
                 Die Schnitzeljagd-App benötigt Zugriff auf deinen Standort, um standortbasierte Aufgaben durchzuführen. Gewähre der App bitte den Zugriff, indem du auf „Zulassen“ tippst.
             </ion-card-content>
-            <ion-button expand="full">Zulassen</ion-button>
+            <ion-button (click)="handleGeolocationPermission()" expand="full">Zulassen</ion-button>
         </ion-card>
 
         <ion-footer>
