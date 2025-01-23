@@ -14,6 +14,7 @@ import {
   IonTitle,
   IonToolbar
 } from "@ionic/angular/standalone";
+import {RouterLink} from "@angular/router";
 
 
 @Component({
@@ -31,7 +32,8 @@ import {
     IonCardTitle,
     IonCardContent,
     IonButton,
-    IonFooter
+    IonFooter,
+    RouterLink
   ]
 })
 export class BerechtigungPage implements OnInit {

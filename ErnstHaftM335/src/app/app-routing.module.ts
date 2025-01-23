@@ -15,6 +15,11 @@ const routes: Routes = [
     path: 'berechtigung',
     loadChildren: () => import('./pages/berechtigung/berechtigung.module').then(m => m.BerechtigungPageModule)
   },
+  {
+    path: 'name',
+    loadChildren: () => import('./pages/name-eingeben/name-eingeben.module').then(m => m.NameEingebenPageModule)
+  },
+
 
 ];
 
