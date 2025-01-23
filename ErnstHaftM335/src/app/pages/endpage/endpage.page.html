@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Schnitzeljagd</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding schnitzeljagd-page">
+  <div class="profile">
+    <h2>{{ playerName }}</h2>
+    <p>Zeit: {{ gameTime }}</p>
+    <img src="assets/avatar.png" alt="Avatar" class="avatar" />
+  </div>
+
+  <div class="score-section">
+    <h3>Dein Score:</h3>
+    <div class="score-icons">
+      <span *ngFor="let emoji of score">{{ emoji }}</span>
+    </div>
+  </div>
+
+  <ion-button expand="block" class="leaderboard-button" (click)="gotoHome()">
+    Zum Leaderboard
+  </ion-button>
+</ion-content>

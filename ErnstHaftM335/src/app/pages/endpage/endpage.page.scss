@@ -1,0 +1,49 @@
+.schnitzeljagd-page {
+  // Setzt den Hintergrund der gesamten Seite auf Weiß
+  ion-content {
+    --background: #ffffff; // Weißer Hintergrund
+  }
+
+  text-align: center; // Zentriert den gesamten Text
+
+  .profile {
+    margin-top: 30px; // Abstand von oben
+
+    h2 {
+      font-size: 1.8rem; // Große Schriftart für den Namen
+      font-weight: bold; // Fettschrift
+    }
+
+    p {
+      font-size: 1.2rem; // Schriftgröße für Zeitangabe
+      color: #6c757d; // Graue Farbe für den Text
+      margin-top: 5px; // Etwas Abstand zum Namen
+    }
+
+    .avatar {
+      margin: 15px auto; // Zentriert und mit Abstand
+      width: 200px; // Breite des Avatars
+      height: 200px; // Höhe des Avatars
+    }
+  }
+
+  .score-section {
+    margin-top: 20px; // Abstand zur Profilsektion
+
+    h3 {
+      font-size: 1.4rem; // Schriftgröße für die Überschrift
+      font-weight: bold; // Fettschrift
+      margin-bottom: 10px; // Abstand nach unten
+    }
+  }
+
+  .leaderboard-button {
+    margin-top: 40px; // Abstand zur Punktesektion
+    font-size: 1.2rem; // Schriftgröße des Buttons
+    font-weight: bold; // Fettschrift
+    background-color:  #00821E; // Grüner Hintergrund
+    color: #ffffff; // Weißer Text
+    --ripple-color: #ffffff; // Weiße Farbe für den Klick-Effekt
+  }
+}
+

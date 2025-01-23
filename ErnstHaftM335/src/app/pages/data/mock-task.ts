@@ -15,31 +15,31 @@ export const TASKS: Task[] = [
     description: "Laufe zum Ping Pong Tisch",
     distance: 100,
     pic: "picture",
-    max_time: 20
+    max_time: 20 // max time in seconds
   },
   {
     id: 2,
-    name: "Ping Pong Tisch",
-    description: "Laufe zum Ping Pong Tisch",
-    distance: 100,
+    name: "Geolocation",
+    description: "Finde den richtigen Standort",
+    distance: 200,
     pic: "picture",
-    max_time: 20
+    max_time: 30 // max time in seconds
   },
   {
     id: 3,
-    name: "Ping Pong Tisch",
-    description: "Laufe zum Ping Pong Tisch",
-    distance: 100,
+    name: "QR Code scannen",
+    description: "Scanne den QR Code",
+    distance: 50,
     pic: "picture",
-    max_time: 20
+    max_time: 25 // max time in seconds
   },
   {
     id: 4,
-    name: "Ping Pong Tisch",
-    description: "Laufe zum Ping Pong Tisch",
-    distance: 100,
+    name: "Gerät anschliessen",
+    description: "Verbinde das Gerät mit dem Strom",
+    distance: 0,
     pic: "picture",
-    max_time: 20
+    max_time: 15 // max time in seconds
   },
-
 ];
+

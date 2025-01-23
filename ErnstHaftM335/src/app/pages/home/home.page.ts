@@ -56,4 +56,7 @@ export class HomePage implements OnInit {
   navigateToTask() {
     this.router.navigate(['/task']);
   }
+  navigateToEnd() {
+    this.router.navigate(['/endpage']);
+  }
 }

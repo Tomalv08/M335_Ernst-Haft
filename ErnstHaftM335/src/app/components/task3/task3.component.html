@@ -8,10 +8,12 @@
       mit dem vorgegebenen Text. Die Aufgabe gilt als erledigt, wenn der
       gescannte QR-Code mit dem richtigen Inhalt übereinstimmt.
     </p>
-    <ion-button expand="block" class="camera-button">Kamera öffnen</ion-button>
+    <ion-button expand="block" class="camera-button" (click)="checkTheQrCode()">Kamera öffnen</ion-button>
   </ion-card-content>
   <ion-button
     expand="full"
     color="success"
     (click)="moveToNextTask()">Weiter</ion-button>
 </ion-card>
+
+<!-- [disabled]="this.scanResult.ScanResult === 'M335@ICT-BZ'" -->
