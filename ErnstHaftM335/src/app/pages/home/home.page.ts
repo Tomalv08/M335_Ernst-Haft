@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { GameDataService } from '../../shared/game-data.service';
 
 @Component({
   selector: 'app-home',
@@ -9,19 +10,28 @@ import { Router } from '@angular/router';
 })
 
 export class HomePage implements OnInit {
-  jagds: { name: string; score: string[]; date: string; gameTime: string }[] = [];
+  jagds: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private gameDataService: GameDataService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadResults();
+    this.loadLeaderboard();
   }
 
-  loadResults(): void {
-    const savedResults = JSON.parse(localStorage.getItem('leaderboard') || '[]');
-    this.jagds = savedResults;
-  }
+  loadLeaderboard(): void {
+    const playerName = this.gameDataService.getPlayerName();
+    const gameTime = this.gameDataService.getGameTime();
+    const score = this.gameDataService.getRewards();
 
+    if (playerName && gameTime && score) {
+      this.jagds.push({
+        name: playerName,
+        score: score,
+        date: new Date().toLocaleDateString(),
+        gameTime: gameTime,
+      });
+    }
+  }
   navigateToName(): void {
     this.router.navigate(['/name']); // Navigate to the game page
   }

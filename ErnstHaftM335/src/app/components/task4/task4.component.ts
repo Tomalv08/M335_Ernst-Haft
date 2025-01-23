@@ -4,6 +4,8 @@ import { Device } from '@capacitor/device';
 import { Haptics } from '@capacitor/haptics';
 import { AlertController } from '@ionic/angular';
 import {IonImg} from "@ionic/angular/standalone";
+import { GameDataService } from '../../shared/game-data.service';
+
 
 @Component({
   selector: 'app-task4',
@@ -13,11 +15,13 @@ import {IonImg} from "@ionic/angular/standalone";
     IonImg
   ]
 })
+
 export class Task4Component implements OnInit {
   @Input() moveToNextTask!: () => void;
+  @Input() endGame!: (playerName: string, gameTime: string, rewards: string[]) => void;
   isCharging: boolean = false;
 
-  constructor(private alertController: AlertController, private router: Router) { }
+  constructor(private alertController: AlertController, private router: Router, private gameDataService: GameDataService) { }
 
   ngOnInit() {
     this.checkBatteryStatus();
@@ -38,9 +42,7 @@ export class Task4Component implements OnInit {
     this.router.navigate(['/endpage']);
   }
   async showSuccessAlert() {
-    // Trigger vibration
     await this.hapticsVibrate();
-
     const alert = await this.alertController.create({
       header: 'Aufgabe abgeschlossen',
       message: 'Das Gerät wird jetzt aufgeladen.',
@@ -48,12 +50,15 @@ export class Task4Component implements OnInit {
         {
           text: 'Abschliessen',
           handler: () => {
-            this.navigateToEnd(); // Go to the next task
+            this.endGame(
+              this.gameDataService.getPlayerName(),
+              this.gameDataService.getGameTime(),
+              this.gameDataService.getRewards()
+            ); // end
           }
         }
       ]
     });
-
     await alert.present();
   }
 

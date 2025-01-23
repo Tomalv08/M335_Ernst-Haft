@@ -7,6 +7,7 @@ import { addIcons } from 'ionicons';
 import { qrCode } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular';
 import {IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle} from "@ionic/angular/standalone";
+import {Haptics} from "@capacitor/haptics";
 
 @Component({
   selector: 'app-task3',
@@ -42,6 +43,7 @@ export class Task3Component {
       });
 
       if (this.scanResult.ScanResult === 'M335@ICT-BZ') {
+        await this.hapticsVibrate();
         await this.showAlert('Erfolg', 'Die Aufgabe wurde erfolgreich abgeschlossen!', [
           {
             text: 'Weitere Aufgabe',
@@ -62,7 +64,7 @@ export class Task3Component {
       }
     } catch (error) {
       console.error('Fehler beim Scannen:', error);
-
+      await this.hapticsImpact()
       await this.showAlert('Scan-Fehler', 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.', [
         {
           text: 'OK',
@@ -81,5 +83,11 @@ export class Task3Component {
       buttons,
     });
     await alert.present();
+  }
+  async hapticsVibrate() {
+    await Haptics.vibrate();
+  }
+  async hapticsImpact(){
+    await Haptics.impact();
   }
 }
