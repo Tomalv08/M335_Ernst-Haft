@@ -16,6 +16,8 @@
       (input)="checkInput()"
       />
     </div>
-    <button class="confirm-button" [disabled]="isDisabled" routerLink="/berechtigung">Bestätigen</button>
+
+    <button class="confirm-button" [disabled]="isDisabled" (click)="confirmName()">Bestätigen</button>
+
   </div>
 </ion-content>
