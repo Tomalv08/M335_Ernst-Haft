@@ -1,22 +1,21 @@
 <div class="task-section">
   <h2>Aufgabe 2</h2>
-  <p>Gehe mindestens 10 Meter von deinem Startpunkt!</p>
-  <p class="distance">
-    Zurückgelegte Distanz:
-    {{ distance !== null ? (distance | number: '1.0-2') : 'Lade...' }} m
+  <p>Laufe 10 Meter!</p>
+  <p >
+    Verbleibende Distanz: {{(goalDistance - (distance || 0)) | number: '1.0-2'}} m
   </p>
-  <p *ngIf="distance !== null && distance < goalDistance">
-    Noch {{ distance !== null ? (goalDistance - distance | number: '1.0-2') : '' }} m übrig.
-  </p>
+  <ion-img src="./assets/image1.jpeg" alt="Laufen"></ion-img>
 
-  <ion-img src="./assets/image2.jpeg" alt="10-Meter-Weg"></ion-img>
+  <!-- Show success message and an image when task is complete -->
+  <div *ngIf="taskComplete" class="success-message">
+    <p class="success">Du hast das Ziel erreicht!</p>
+    <ion-img src="./assets/schnitzel.webp" alt="Goal reached"></ion-img>
+  </div>
 
-  <!-- Disable the button until distance >= 10 meters -->
+  <!-- Button to move to next task; it's disabled until the goal is reached -->
   <ion-button
     expand="full"
     color="success"
     [disabled]="distance === null || distance < goalDistance"
-    (click)="onTaskComplete()">
-    Weiter
-  </ion-button>
+    (click)="moveToNextTask()">Weiter</ion-button>
 </div>

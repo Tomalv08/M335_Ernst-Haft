@@ -2,11 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 50px;
   background-color: #f9f9f9; // Light background for contrast
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 20px;
+  max-width: 600px; // Limit the width to make the layout cleaner on larger screens
+  width: 100%; // Ensure the section takes full available width
 
   h2 {
     font-size: 24px;
@@ -20,20 +23,28 @@
     color: #555;
     text-align: center;
     margin: 5px 0;
+    line-height: 1.5;
 
     &.distance {
       font-weight: bold;
       color: #0070c0; // Highlighted text for distance
     }
+
+    &.success {
+      color: green;
+      font-weight: bold;
+      font-size: 18px;
+    }
   }
 
   ion-img {
-    width: 100%; // Make the image responsive
+    width: 100%;
     max-width: 200px;
     height: auto;
     margin: 15px 0;
     border-radius: 8px; // Rounded corners for the image
-    border: 1px solid #ddd; // Subtle border
+    border: 1px solid #ddd; // Subtle border around the image
+    object-fit: cover;
   }
 
   ion-button {
@@ -42,10 +53,29 @@
     max-width: 300px;
     font-size: 18px;
     font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px;
+    border-radius: 8px;
 
     &.button-disabled {
       background-color: #ccc; // Grey background when disabled
       color: #666; // Grey text color when disabled
     }
+  }
+
+  .success-message {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  // Responsiveness for smaller devices
+  @media screen and (max-width: 768px) {
+    padding: 30px;
+    max-width: 90%;
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 20px;
+    max-width: 100%;
   }
 }
