@@ -43,7 +43,7 @@ export class NameEingebenPage implements OnInit {
             text: 'Start',
             handler: () => {
               console.log('Spiel gestartet');
-              this.router.navigate(['/home']); // Passe die Route an
+              this.router.navigate(['/task']); // Passe die Route an
             }
           }
         ]
