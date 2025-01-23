@@ -1,3 +1,22 @@
-<p>
-  task2 works!
-</p>
+<div class="task-section">
+  <h2>Aufgabe 2</h2>
+  <p>Gehe mindestens 10 Meter von deinem Startpunkt!</p>
+  <p class="distance">
+    Zurückgelegte Distanz:
+    {{ distance !== null ? (distance | number: '1.0-2') : 'Lade...' }} m
+  </p>
+  <p *ngIf="distance !== null && distance < goalDistance">
+    Noch {{ distance !== null ? (goalDistance - distance | number: '1.0-2') : '' }} m übrig.
+  </p>
+
+  <ion-img src="./assets/image2.jpeg" alt="10-Meter-Weg"></ion-img>
+
+  <!-- Disable the button until distance >= 10 meters -->
+  <ion-button
+    expand="full"
+    color="success"
+    [disabled]="distance === null || distance < goalDistance"
+    (click)="onTaskComplete()">
+    Weiter
+  </ion-button>
+</div>

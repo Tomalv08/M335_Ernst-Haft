@@ -50,15 +50,6 @@ export class HomePage implements OnInit {
     }
   }
 
-
-  navigateToTask() {
-    this.router.navigate(['/task']);
-  }
-
-  navigateToBerechtigung() {
-    this.router.navigate(['/berechtigung']);
-  }
-
   navigateToName() {
     this.router.navigate(['/name']);
   }
