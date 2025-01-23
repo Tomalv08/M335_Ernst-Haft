@@ -19,12 +19,10 @@ import { Task } from '../data/mock-task';
     IonToolbar,
     IonTitle,
     IonContent,
-    IonButton,
     Task1Component,
     Task2Component,
     Task3Component,
     Task4Component,
-    IonFooter,
     NgIf,
   ],
 })
