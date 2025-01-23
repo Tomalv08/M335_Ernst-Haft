@@ -31,7 +31,7 @@ export class NameEingebenPage implements OnInit {
 
   async confirmName() {
     if (this.inputValue.trim()) {
-      localStorage.setItem('playerName', this.inputValue.trim());
+      localStorage.setItem('playerName', this.inputValue.trim());  // Name speichern
       console.log('Gespeicherter Name:', localStorage.getItem('playerName')); // Debug
 
       // Alert anzeigen
@@ -43,7 +43,7 @@ export class NameEingebenPage implements OnInit {
             text: 'Start',
             handler: () => {
               console.log('Spiel gestartet');
-              this.router.navigate(['/berechtigung']); // Passe die Route an
+              this.router.navigate(['/berechtigung']); // Passe die Route an, um die Aufgaben-Seite zu laden
             }
           }
         ]
@@ -52,4 +52,5 @@ export class NameEingebenPage implements OnInit {
       await alert.present();
     }
   }
+
 }

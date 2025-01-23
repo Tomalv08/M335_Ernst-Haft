@@ -1,44 +1,45 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>Schnitzeljagd</ion-title>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-title>Schnitzeljagd</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Berechtigung</ion-title>
-        </ion-toolbar>
-    </ion-header>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Berechtigung</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-    <div class="container">
-        <!-- Kamera-Berechtigung -->
-        <ion-card>
-            <img src="assets/icon/kreuz.png" alt="Kreuz" class="icon-close" />
-            <ion-card-header>
-                <ion-card-title>Kamera</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                Im Rahmen der Schnitzeljagd-App wird Zugriff auf die Kamera benötigt, um bestimmte Aufgaben zu erfüllen, wie das Scannen von QR-Codes. Bitte erlaube der App den Zugriff auf die Kamera, indem du auf „Zulassen“ tippst.
-            </ion-card-content>
-            <ion-button (click)="handleCameraPermission()" expand="full">Zulassen</ion-button>
-        </ion-card>
+  <div class="container">
+    <!-- Kamera-Berechtigung -->
+    <ion-card>
+      <img src="assets/icon/kreuz.png" alt="Kreuz" class="icon-close" />
+      <ion-card-header>
+        <ion-card-title>Kamera</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Im Rahmen der Schnitzeljagd-App wird Zugriff auf die Kamera benötigt, um bestimmte Aufgaben zu erfüllen, wie das Scannen von QR-Codes. Bitte erlaube der App den Zugriff auf die Kamera, indem du auf „Zulassen“ tippst.
+      </ion-card-content>
+      <ion-button (click)="handleCameraPermission()" expand="full">Zulassen</ion-button>
+    </ion-card>
 
-        <!-- Standort-Berechtigung -->
-        <ion-card>
-            <img src="assets/icon/kreuz.png" alt="Kreuz" class="icon-close" />
-            <ion-card-header>
-                <ion-card-title>Standort</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-                Die Schnitzeljagd-App benötigt Zugriff auf deinen Standort, um standortbasierte Aufgaben durchzuführen. Gewähre der App bitte den Zugriff, indem du auf „Zulassen“ tippst.
-            </ion-card-content>
-            <ion-button (click)="handleGeolocationPermission()" expand="full">Zulassen</ion-button>
-        </ion-card>
+    <!-- Standort-Berechtigung -->
+    <ion-card>
+      <img src="assets/icon/kreuz.png" alt="Kreuz" class="icon-close" />
+      <ion-card-header>
+        <ion-card-title>Standort</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Die Schnitzeljagd-App benötigt Zugriff auf deinen Standort, um standortbasierte Aufgaben durchzuführen. Gewähre der App bitte den Zugriff, indem du auf „Zulassen“ tippst.
+      </ion-card-content>
+      <ion-button (click)="handleGeolocationPermission()" expand="full">Zulassen</ion-button>
+    </ion-card>
 
-        <ion-footer>
-            <ion-button expand="block" color="danger">Abbrechen</ion-button>
-            <ion-button expand="block" color="success" routerLink="/task">Weiter</ion-button>
-        </ion-footer>
-    </div>
+    <ion-footer>
+      <ion-button expand="block" color="danger">Abbrechen</ion-button>
+      <!-- Button wird nur aktiviert, wenn beide Berechtigungen erteilt wurden -->
+      <ion-button expand="block" color="success" [disabled]="!isContinueButtonEnabled()" routerLink="/task">Weiter</ion-button>
+    </ion-footer>
+  </div>
 </ion-content>
