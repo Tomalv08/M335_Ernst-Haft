@@ -1,28 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Schnitzeljagd</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content [fullscreen]="true">
-  <!-- Fixed Top Section -->
-  <div class="top-section">
-    <div class="name">Jason</div>
-    <div class="time">0:00</div>
-    <div class="cancel">Abbrechen</div>
-  </div>
-
-  <!-- Dynamic Task Section -->
+<!-- Dynamic Task Section -->
   <div class="task-section">
     <h2>Aufgabe 1</h2>
     <p>Laufe zum Ping Pong Tisch!</p>
     <p class="distance">
-      Verbleibende Distanz: {{ distance !== null ? (distance | number:'1.0-2') : 'Lade...' }} m
+      Verbleibende Distanz:
+      {{ distance !== null ? (distance | number: '1.0-2') : 'Lade...' }} m
     </p>
-    <ion-img src="./assets/task1.png" alt="Ping Pong Tisch"></ion-img>
+    <ion-img src="./assets/image1.jpeg" alt="Ping Pong Tisch"></ion-img>
 
-    <ion-button expand="full" color="success">
+    <!-- Disable the button until distance < 10 meters -->
+    <ion-button
+      expand="full"
+      color="success"
+      [disabled]="distance === null || distance >= 10"
+    >
       Weiter
     </ion-button>
   </div>
-</ion-content>
+
