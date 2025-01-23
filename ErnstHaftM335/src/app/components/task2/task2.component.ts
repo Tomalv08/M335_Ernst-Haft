@@ -8,8 +8,10 @@ import {
   IonImg,
   IonTitle,
   IonToolbar,
+  AlertController,
 } from '@ionic/angular/standalone';
 import { haversineDistance } from '../task1/task1.component';
+import { Haptics } from '@capacitor/haptics';
 
 @Component({
   selector: 'app-task2',
@@ -27,7 +29,7 @@ export class Task2Component implements OnInit, OnDestroy {
 
   @Input() moveToNextTask!: () => void; // Input to trigger moving to the next task
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone, private alertController: AlertController) {}
 
   async ngOnInit() {
     try {
@@ -81,9 +83,28 @@ export class Task2Component implements OnInit, OnDestroy {
     }
   }
 
-  showSuccessMessage() {
-    console.log('You reached your goal!');
-    this.taskComplete = true; // Enable the Weiter button and display success message
+  async showSuccessMessage() {
+    // Trigger vibration
+    await this.hapticsVibrate();
+
+    const alert = await this.alertController.create({
+      header: 'Aufgabe abgeschlossen',
+      message: 'Sie haben Ihr Ziel erreicht!',
+      buttons: [
+        {
+          text: 'Weiter',
+          handler: () => {
+            this.moveToNextTask(); // Go to the next task
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async hapticsVibrate() {
+    await Haptics.vibrate();
   }
 
   ngOnDestroy() {

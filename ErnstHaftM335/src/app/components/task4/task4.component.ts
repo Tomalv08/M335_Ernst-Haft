@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Device } from '@capacitor/device';
+import { Haptics } from '@capacitor/haptics';
 import { AlertController } from '@ionic/angular';
 import {
   IonButton,
@@ -31,7 +32,7 @@ import {
 })
 export class Task4Component implements OnInit {
   @Input() moveToNextTask!: () => void;
-  isCharging: boolean | undefined = false;
+  isCharging: boolean = false;
 
   constructor(private alertController: AlertController) { }
 
@@ -40,25 +41,38 @@ export class Task4Component implements OnInit {
   }
 
   async checkBatteryStatus() {
-    // Check battery status every 5 seconds
     const intervalId = setInterval(async () => {
       const info = await Device.getBatteryInfo();
-      this.isCharging = info.isCharging;
+      this.isCharging = !!info.isCharging;
 
       if (this.isCharging) {
         clearInterval(intervalId); // Stop checking once charging is detected
         this.showSuccessAlert(); // Show success alert
       }
-    }, 5000); // Adjust the interval as needed
+    }, 5000);
   }
 
   async showSuccessAlert() {
+    // Trigger vibration
+    await this.hapticsVibrate();
+
     const alert = await this.alertController.create({
       header: 'Aufgabe abgeschlossen',
       message: 'Das Gerät wird jetzt aufgeladen.',
-      buttons: ['OK']
+      buttons: [
+        {
+          text: 'Weiter',
+          handler: () => {
+            this.moveToNextTask(); // Go to the next task
+          }
+        }
+      ]
     });
 
     await alert.present();
+  }
+
+  async hapticsVibrate() {
+    await Haptics.vibrate();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone, Input  } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   IonButton,
@@ -10,6 +10,8 @@ import {
 } from '@ionic/angular/standalone';
 import { Geolocation } from '@capacitor/geolocation';
 import { DecimalPipe } from '@angular/common';
+import { Haptics } from '@capacitor/haptics';
+import { AlertController } from '@ionic/angular';
 
 // Haversine formula to calculate distance
 export function haversineDistance(
@@ -50,7 +52,7 @@ export class Task1Component implements OnInit, OnDestroy {
 
   @Input() moveToNextTask!: () => void;
 
-  constructor(private ngZone: NgZone, private router: Router) {}
+  constructor(private ngZone: NgZone, private router: Router, private alertController: AlertController) {}
 
   async ngOnInit() {
     try {
@@ -75,6 +77,11 @@ export class Task1Component implements OnInit, OnDestroy {
               );
 
               console.log('Distance to fixedCoords:', this.distance);
+
+              // Check if the distance is less than 10 meters
+              if (this.distance !== null && this.distance < 10) {
+                this.showSuccessAlert(); // Show success alert
+              }
             });
           }
         }
@@ -90,6 +97,30 @@ export class Task1Component implements OnInit, OnDestroy {
         console.error('Error clearing watch:', err);
       });
     }
+  }
+
+  async showSuccessAlert() {
+    // Trigger vibration
+    await this.hapticsVibrate();
+
+    const alert = await this.alertController.create({
+      header: 'Aufgabe abgeschlossen',
+      message: 'Sie haben das Ziel erreicht.',
+      buttons: [
+        {
+          text: 'Weiter',
+          handler: () => {
+            this.moveToNextTask(); // Go to the next task
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async hapticsVibrate() {
+    await Haptics.vibrate();
   }
 
   onCancel() {
