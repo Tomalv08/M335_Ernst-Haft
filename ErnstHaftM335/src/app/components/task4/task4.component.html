@@ -1,3 +1,20 @@
-<p>
-  task4 works!
-</p>
+<div class="task-section">
+  <h2>Aufgabe: Gerät aufladen</h2>
+
+  <div *ngIf="!isCharging">
+    <p>Bitte verbinden Sie das Gerät mit dem Ladegerät.</p>
+    <ion-img src="./assets/connect-charger.jpeg" alt="Ladegerät verbinden"></ion-img>
+  </div>
+
+  <div *ngIf="isCharging" class="success-message">
+    <p class="success">Das Gerät wird aufgeladen!</p>
+    <ion-img src="./assets/charging.webp" alt="Gerät wird aufgeladen"></ion-img>
+  </div>
+
+  <!-- Button to move to next task; enabled only when charging -->
+  <ion-button
+    expand="full"
+    color="success"
+    [disabled]="!isCharging"
+    (click)="moveToNextTask()">Weiter</ion-button>
+</div>

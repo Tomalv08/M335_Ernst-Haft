@@ -23,6 +23,7 @@ export class Task2Component implements OnInit, OnDestroy {
   distance: number | null = null; // Distance walked
   watchId: string | null = null; // ID for the Geolocation watch
   goalDistance = 10; // Distance goal in meters
+  taskComplete = false;
 
   @Input() moveToNextTask!: () => void; // Input to trigger moving to the next task
 
@@ -55,17 +56,8 @@ export class Task2Component implements OnInit, OnDestroy {
                 longitude: position.coords.longitude,
               };
 
-              // Calculate the distance from the starting point
-              if (this.startCoords && this.currentCoords) {
-                this.distance = haversineDistance(this.startCoords, this.currentCoords);
-              }
-
-              console.log('Distance walked:', this.distance);
-
-              // Check if the goal distance is reached
-              if (this.distance !== null && this.distance >= this.goalDistance) {
-                this.onTaskComplete();
-              }
+              // Call the updateDistance method whenever position changes
+              this.updateDistance();
             });
           }
         }
@@ -75,9 +67,23 @@ export class Task2Component implements OnInit, OnDestroy {
     }
   }
 
-  onTaskComplete() {
-    console.log('Task 2 complete!');
-    this.moveToNextTask(); // Mark the task as complete and move to the next task
+  // Method to update the distance walked
+  updateDistance() {
+    if (this.startCoords && this.currentCoords) {
+      // Calculate the distance from the starting point
+      this.distance = haversineDistance(this.startCoords, this.currentCoords);
+      console.log('Distance walked:', this.distance);
+
+      // Check if the goal distance is reached
+      if (this.distance !== null && this.distance >= this.goalDistance) {
+        this.showSuccessMessage(); // Call the function to handle UI changes
+      }
+    }
+  }
+
+  showSuccessMessage() {
+    console.log('You reached your goal!');
+    this.taskComplete = true; // Enable the Weiter button and display success message
   }
 
   ngOnDestroy() {
