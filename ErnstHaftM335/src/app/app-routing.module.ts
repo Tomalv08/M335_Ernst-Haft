@@ -24,8 +24,6 @@ const routes: Routes = [
     path: 'name',
     loadChildren: () => import('./pages/name-eingeben/name-eingeben.module').then(m => m.NameEingebenPageModule)
   },
-
-
 ];
 
 @NgModule({

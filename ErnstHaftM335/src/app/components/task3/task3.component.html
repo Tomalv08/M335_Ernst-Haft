@@ -1,3 +1,19 @@
-<p>
-  task3 works!
-</p>
+<ion-card class="task-box">
+  <ion-card-header>
+    <ion-card-title>Aufgabe 3</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>
+      Scanne den QR-Code mit der Kamera deines Geräts und vergleiche den Inhalt
+      mit dem vorgegebenen Text. Die Aufgabe gilt als erledigt, wenn der
+      gescannte QR-Code mit dem richtigen Inhalt übereinstimmt.
+    </p>
+    <ion-button expand="block" class="camera-button">Kamera öffnen</ion-button>
+  </ion-card-content>
+  <ion-button
+    expand="full"
+    color="success"
+    (click)="onTaskComplete()">
+    Weiter
+  </ion-button>
+</ion-card>
