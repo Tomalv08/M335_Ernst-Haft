@@ -8,15 +8,15 @@
   <!-- Fixed Top Section -->
   <div class="top-section">
     <div class="name">Jason</div>
-    <div class="time">0:00</div>
+    <div class="time">{{ timerDisplay }}</div> <!-- Updated to show timer -->
     <button class="cancel" ion-button (click)="cancelGame()">Abbrechen</button>
   </div>
 
-    <!-- Dynamically render each task component -->
-    <div class="task-container">
-        <app-task1 *ngIf="currentTaskIndex === 0"></app-task1>
-        <app-task2 *ngIf="currentTaskIndex === 1"></app-task2>
-        <app-task3 *ngIf="currentTaskIndex === 2"></app-task3>
-        <app-task4 *ngIf="currentTaskIndex === 3"></app-task4>
-    </div>
+  <!-- Dynamically render each task component -->
+  <div class="task-container">
+    <app-task1 *ngIf="currentTaskIndex === 0"></app-task1>
+    <app-task2 *ngIf="currentTaskIndex === 1"></app-task2>
+    <app-task3 *ngIf="currentTaskIndex === 2"></app-task3>
+    <app-task4 *ngIf="currentTaskIndex === 3"></app-task4>
+  </div>
 </ion-content>
