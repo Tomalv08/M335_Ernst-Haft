@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';  // AlertController importieren
-import { Camera, CameraPermissionType } from '@capacitor/camera';
+import { AlertController } from '@ionic/angular';
+import { Camera } from '@capacitor/camera';
 import {
   IonButton,
   IonCard,
@@ -10,12 +10,10 @@ import {
   IonContent,
   IonFooter,
   IonHeader,
-  IonIcon,
   IonTitle,
   IonToolbar
 } from "@ionic/angular/standalone";
-import {RouterLink} from "@angular/router";
-
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-berechtigung',
@@ -27,7 +25,6 @@ import {RouterLink} from "@angular/router";
     IonToolbar,
     IonTitle,
     IonCard,
-    IonIcon,
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
@@ -42,27 +39,39 @@ export class BerechtigungPage implements OnInit {
   ngOnInit() {}
 
   async handleCameraPermission() {
-    // Check camera permissions
+    // Überprüfen der Kamera-Berechtigungen
     const permissions = await Camera.checkPermissions();
 
-    if (permissions.camera !== 'granted') {
-      // Request permissions using native Android pop-up
+    if (permissions.camera === 'granted') {
+      // Berechtigung bereits erteilt, Popup anzeigen
+      await this.showAlreadyGrantedAlert();
+    } else {
+      // Berechtigungen anfordern
       const request = await Camera.requestPermissions({ permissions: ['camera'] });
 
       if (request.camera !== 'granted') {
         console.error('Kamerazugriff nicht erteilt');
-        return; // Exit if permission is denied
+        return; // Beenden, wenn die Berechtigung abgelehnt wurde
       }
-    }
 
-    // Wenn Berechtigung erteilt wurde, Benachrichtigung anzeigen
-    await this.showAlert();
+      // Wenn Berechtigung erteilt wurde, Benachrichtigung anzeigen
+      await this.showAlert();
+    }
   }
 
   async showAlert() {
     const alert = await this.alertController.create({
       header: 'Zugriffsbestätigung',
       message: 'Du hast die Kamera-Berechtigung erteilt!',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async showAlreadyGrantedAlert() {
+    const alert = await this.alertController.create({
+      header: 'Hinweis',
+      message: 'Die Kamera-Berechtigung wurde bereits erteilt.',
       buttons: ['OK'],
     });
     await alert.present();
