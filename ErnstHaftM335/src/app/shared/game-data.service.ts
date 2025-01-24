@@ -28,7 +28,8 @@ export class GameDataService {
 
   setRewards(rewards: string[]): void {
     this.rewards = rewards;
-    localStorage.setItem('score', JSON.stringify(rewards));
+    localStorage.setItem('score','0');
+    //localStorage.setItem('score', JSON.stringify(rewards));
   }
 
   getRewards(): string[] {

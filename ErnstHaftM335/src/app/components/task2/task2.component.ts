@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, NgZone, Input } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
-import { DecimalPipe } from '@angular/common';
+import {DecimalPipe, NgIf} from '@angular/common';
 import {
     IonImg,
     AlertController, IonButton,
@@ -12,7 +12,7 @@ import { Haptics } from '@capacitor/haptics';
   selector: 'app-task2',
   templateUrl: './task2.component.html',
   styleUrls: ['./task2.component.scss'],
-    imports: [IonImg, DecimalPipe, IonButton],
+  imports: [IonImg, DecimalPipe, IonButton, NgIf],
 })
 export class Task2Component implements OnInit, OnDestroy {
   startCoords: { latitude: number; longitude: number } | null = null; // Starting position

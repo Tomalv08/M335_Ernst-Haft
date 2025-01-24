@@ -76,7 +76,6 @@ export class TaskPage implements OnInit, OnDestroy {
       this.timerInterval = null;
     }
   }
-
   moveToNextTask(): void {
     if (this.currentTaskIndex < this.tasks.length) {
       const taskEndTime = Date.now();
@@ -102,6 +101,8 @@ export class TaskPage implements OnInit, OnDestroy {
       }
     }
   }
+
+
 
 
   endGame(): void {

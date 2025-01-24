@@ -64,7 +64,6 @@ export class Task3Component {
       }
     } catch (error) {
       console.error('Fehler beim Scannen:', error);
-      await this.hapticsImpact()
       await this.showAlert('Scan-Fehler', 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.', [
         {
           text: 'OK',
@@ -87,7 +86,5 @@ export class Task3Component {
   async hapticsVibrate() {
     await Haptics.vibrate();
   }
-  async hapticsImpact(){
-    await Haptics.impact();
-  }
+
 }

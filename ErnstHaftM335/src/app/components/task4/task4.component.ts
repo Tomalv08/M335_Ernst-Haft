@@ -5,16 +5,17 @@ import { Haptics } from '@capacitor/haptics';
 import { AlertController } from '@ionic/angular';
 import {IonButton, IonImg} from "@ionic/angular/standalone";
 import { GameDataService } from '../../shared/game-data.service';
+import {NgIf} from "@angular/common";
 
 
 @Component({
   selector: 'app-task4',
   templateUrl: './task4.component.html',
   styleUrls: ['./task4.component.scss'],
-    imports: [
-        IonImg,
-        IonButton
-    ]
+  imports: [
+    IonImg,
+    NgIf
+  ]
 })
 
 export class Task4Component implements OnInit {
@@ -51,7 +52,7 @@ export class Task4Component implements OnInit {
         {
           text: 'Abschliessen',
           handler: () => {
-            this.endGame(); // end
+            this.moveToNextTask(); // end
           }
         }
       ]

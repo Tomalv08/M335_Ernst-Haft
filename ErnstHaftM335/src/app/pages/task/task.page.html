@@ -26,7 +26,7 @@
     </app-task3>
     <app-task4
       *ngIf="currentTaskIndex === 3"
-      [moveToNextTask]="moveToNextTask" [endGame]="endGame.bind(this)">
+      [moveToNextTask]="moveToNextTask.bind(this)">
     </app-task4>
 
   </div>
