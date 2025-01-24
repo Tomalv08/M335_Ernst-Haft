@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Camera } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
-import {Router, RouterLink} from '@angular/router';  // Importiere den Router
+import { Router, RouterLink } from '@angular/router'; // Importiere den Router
 import {
   IonButton,
   IonCard,
@@ -13,8 +13,8 @@ import {
   IonFooter,
   IonHeader,
   IonTitle,
-  IonToolbar
-} from "@ionic/angular/standalone";
+  IonToolbar,
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-berechtigung',
@@ -31,15 +31,18 @@ import {
     IonCardContent,
     IonButton,
     IonFooter,
-    RouterLink
-  ]
+    RouterLink,
+  ],
 })
 export class BerechtigungPage implements OnInit {
   // Variablen zum Überwachen des Berechtigungsstatus
   cameraPermissionGranted = false;
   geolocationPermissionGranted = false;
 
-  constructor(private alertController: AlertController, private router: Router) {}
+  constructor(
+    private alertController: AlertController,
+    private router: Router,
+  ) {}
 
   ngOnInit() {}
 
@@ -55,7 +58,9 @@ export class BerechtigungPage implements OnInit {
       await this.showAlreadyGrantedAlert('Kamera');
     } else {
       console.log('Fordere Kamera-Berechtigung an...');
-      const request = await Camera.requestPermissions({ permissions: ['camera'] });
+      const request = await Camera.requestPermissions({
+        permissions: ['camera'],
+      });
       console.log('Angeforderter Kamera-Berechtigungsstatus:', request.camera);
 
       if (request.camera === 'granted') {
@@ -72,7 +77,10 @@ export class BerechtigungPage implements OnInit {
   async handleGeolocationPermission() {
     console.log('Prüfe Standort-Berechtigung...');
     const permissions = await Geolocation.checkPermissions();
-    console.log('Aktueller Standort-Berechtigungsstatus:', permissions.location);
+    console.log(
+      'Aktueller Standort-Berechtigungsstatus:',
+      permissions.location,
+    );
 
     if (permissions.location === 'granted') {
       console.log('Standort-Berechtigung bereits erteilt.');
@@ -81,7 +89,10 @@ export class BerechtigungPage implements OnInit {
     } else {
       console.log('Fordere Standort-Berechtigung an...');
       const request = await Geolocation.requestPermissions();
-      console.log('Angeforderter Standort-Berechtigungsstatus:', request.location);
+      console.log(
+        'Angeforderter Standort-Berechtigungsstatus:',
+        request.location,
+      );
 
       if (request.location === 'granted') {
         console.log('Standort-Berechtigung erfolgreich erteilt.');
@@ -95,37 +106,52 @@ export class BerechtigungPage implements OnInit {
 
   // Generischer Alert für erteilte Berechtigung
   async showAlert(permissionType: string) {
-    console.log(`${permissionType}-Berechtigung erteilt. Zeige Bestätigungs-Popup.`);
+    console.log(
+      `${permissionType}-Berechtigung erteilt. Zeige Bestätigungs-Popup.`,
+    );
     const alert = await this.alertController.create({
       header: 'Zugriffsbestätigung',
       message: `Du hast die ${permissionType}-Berechtigung erteilt!`,
-      buttons: [{
-        text: 'Weiter',
-        handler: () => {
-          console.log(`${permissionType}-Berechtigung bestätigt, weiter zur TaskPage`);
-          this.router.navigate(['/task']);  // Navigiere zur TaskPage
-        }
-      }],
+      buttons: [
+        {
+          text: 'Weiter',
+          handler: () => {
+            console.log(
+              `${permissionType}-Berechtigung bestätigt, weiter zur TaskPage`,
+            );
+            this.router.navigate(['/task']); // Navigiere zur TaskPage
+          },
+        },
+      ],
     });
     await alert.present();
   }
 
   // Generischer Alert für bereits erteilte Berechtigung
   async showAlreadyGrantedAlert(permissionType: string) {
-    console.log(`${permissionType}-Berechtigung wurde bereits erteilt. Zeige Hinweis-Popup.`);
+    console.log(
+      `${permissionType}-Berechtigung wurde bereits erteilt. Zeige Hinweis-Popup.`,
+    );
     const alert = await this.alertController.create({
       header: 'Hinweis',
       message: `Die ${permissionType}-Berechtigung wurde bereits erteilt.`,
-      buttons: [{
-        text: 'OK',
-        handler: () => {
-          console.log(`${permissionType}-Berechtigung bereits erteilt.`);
-          // Überprüfen, ob jetzt beide Berechtigungen erteilt wurden, um den Button zu aktivieren
-          if (this.cameraPermissionGranted && this.geolocationPermissionGranted) {
-            console.log('Beide Berechtigungen erteilt, Weiter-Button aktivieren');
-          }
-        }
-      }],
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            console.log(`${permissionType}-Berechtigung bereits erteilt.`);
+            // Überprüfen, ob jetzt beide Berechtigungen erteilt wurden, um den Button zu aktivieren
+            if (
+              this.cameraPermissionGranted &&
+              this.geolocationPermissionGranted
+            ) {
+              console.log(
+                'Beide Berechtigungen erteilt, Weiter-Button aktivieren',
+              );
+            }
+          },
+        },
+      ],
     });
     await alert.present();
   }

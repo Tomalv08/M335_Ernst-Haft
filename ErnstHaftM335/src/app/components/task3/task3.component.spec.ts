@@ -9,8 +9,8 @@ describe('Task3Component', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ Task3Component ],
-      imports: [IonicModule.forRoot()]
+      declarations: [Task3Component],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Task3Component);

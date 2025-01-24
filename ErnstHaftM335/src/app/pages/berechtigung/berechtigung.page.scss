@@ -10,13 +10,13 @@
     gap: 1.5rem; // Abstand zwischen den Boxen
 
     ion-card {
-      background: #D9D9D9; // Hintergrund der Boxen
+      background: #d9d9d9; // Hintergrund der Boxen
       border-radius: 10px;
       border: 1px solid #c0c0c0;
       position: relative; // Für die Positionierung des Icons erforderlich
 
       ion-card-header {
-        background: #D9D9D9; // Gleiche Hintergrundfarbe wie die Box
+        background: #d9d9d9; // Gleiche Hintergrundfarbe wie die Box
         border-bottom: 1px solid #c0c0c0;
         display: flex;
         align-items: center;

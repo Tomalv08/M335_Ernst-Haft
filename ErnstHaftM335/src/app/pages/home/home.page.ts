@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GameDataService } from '../../shared/game-data.service';
-import {Jagd} from "../data/mock-jagd";
+import { Jagd } from '../data/mock-jagd';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +9,13 @@ import {Jagd} from "../data/mock-jagd";
   styleUrls: ['home.page.scss'],
   standalone: false,
 })
-
 export class HomePage implements OnInit {
   jagds: Jagd[] = []; // Array für Runden
 
-  constructor(private gameDataService: GameDataService, private router: Router) {}
+  constructor(
+    private gameDataService: GameDataService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.loadLeaderboard();

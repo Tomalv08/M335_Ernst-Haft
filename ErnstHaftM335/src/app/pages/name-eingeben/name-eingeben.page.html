@@ -13,11 +13,16 @@
         id="name"
         class="input-field"
         [(ngModel)]="playerName"
-      (input)="checkInput()"
+        (input)="checkInput()"
       />
     </div>
 
-    <button class="confirm-button" [disabled]="isDisabled" (click)="confirmName()">Bestätigen</button>
-
+    <button
+      class="confirm-button"
+      [disabled]="isDisabled"
+      (click)="confirmName()"
+    >
+      Bestätigen
+    </button>
   </div>
 </ion-content>

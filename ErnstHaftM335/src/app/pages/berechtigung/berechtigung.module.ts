@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { BerechtigungPageRoutingModule } from './berechtigung-routing.module';
 
-import { BerechtigungPage } from './berechtigung.page'
+import { BerechtigungPage } from './berechtigung.page';
 
 @NgModule({
   imports: [
@@ -14,9 +14,9 @@ import { BerechtigungPage } from './berechtigung.page'
     FormsModule,
     IonicModule,
     BerechtigungPageRoutingModule,
-    BerechtigungPage
+    BerechtigungPage,
   ],
 
-  declarations: []
+  declarations: [],
 })
 export class BerechtigungPageModule {}

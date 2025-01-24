@@ -14,8 +14,8 @@ import { NameEingebenPage } from './name-eingeben.page';
     FormsModule,
     IonicModule,
     NameEingebenPageRoutingModule,
-    NameEingebenPage
+    NameEingebenPage,
   ],
-  declarations: []
+  declarations: [],
 })
 export class NameEingebenPageModule {}

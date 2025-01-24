@@ -19,7 +19,7 @@ import { Task4Component } from '../../components/task4/task4.component';
     Task1Component,
     Task2Component,
     Task3Component,
-    Task4Component
-  ]
+    Task4Component,
+  ],
 })
 export class TaskPageModule {}

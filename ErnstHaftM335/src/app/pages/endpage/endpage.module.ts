@@ -14,8 +14,8 @@ import { EndpagePage } from './endpage.page';
     FormsModule,
     IonicModule,
     EndpagePageRoutingModule,
-    EndpagePage
+    EndpagePage,
   ],
-  declarations: []
+  declarations: [],
 })
 export class EndpagePageModule {}

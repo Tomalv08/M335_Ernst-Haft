@@ -6,8 +6,8 @@ import { NameEingebenPage } from './name-eingeben.page';
 const routes: Routes = [
   {
     path: '',
-    component: NameEingebenPage
-  }
+    component: NameEingebenPage,
+  },
 ];
 
 @NgModule({

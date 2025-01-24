@@ -5,8 +5,8 @@ import { TaskPage } from './task.page';
 const routes: Routes = [
   {
     path: '',
-    component: TaskPage
-  }
+    component: TaskPage,
+  },
 ];
 
 @NgModule({

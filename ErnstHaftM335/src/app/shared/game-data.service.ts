@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Jagd} from "../pages/data/mock-jagd";
+import { Jagd } from '../pages/data/mock-jagd';
 
 @Injectable({
   providedIn: 'root',

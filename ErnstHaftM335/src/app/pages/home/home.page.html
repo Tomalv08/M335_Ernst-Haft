@@ -8,7 +8,7 @@
   <ion-img
     src="../assets/schnitzel.webp"
     alt="Schnitzeljagd"
-    style="height: 300px; margin:20px"
+    style="height: 300px; margin: 20px"
   ></ion-img>
   <ion-content>
     <ion-list>
@@ -17,10 +17,15 @@
           <h2>{{ jagd.name }}</h2>
           <p>Datum: {{ jagd.date }}</p>
           <p>Zeit: {{ jagd.time }}</p>
-          <p>Aufgaben abgeschlossen: {{ jagd.tasks_done }} / {{ jagd.tasks_long }}</p>
+          <p>
+            Aufgaben abgeschlossen: {{ jagd.tasks_done }} / {{ jagd.tasks_long
+            }}
+          </p>
         </ion-label>
       </ion-item>
     </ion-list>
   </ion-content>
-  <ion-button expand="full" (click)="navigateToName()">Schnitzeljagd starten</ion-button>
+  <ion-button expand="full" (click)="navigateToName()"
+    >Schnitzeljagd starten</ion-button
+  >
 </ion-content>

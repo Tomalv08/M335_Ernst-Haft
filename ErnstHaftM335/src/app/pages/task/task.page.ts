@@ -1,5 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonFooter } from '@ionic/angular/standalone';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButton,
+  IonFooter,
+} from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { Task1Component } from '../../components/task1/task1.component';
 import { Task2Component } from '../../components/task2/task2.component';
@@ -9,7 +16,7 @@ import { NgIf } from '@angular/common';
 import { TASKS } from '../data/mock-task';
 import { Task } from '../data/mock-task';
 import { GameDataService } from '../../shared/game-data.service';
-import {Jagd} from "../data/mock-jagd";
+import { Jagd } from '../data/mock-jagd';
 
 @Component({
   selector: 'app-task',
@@ -29,7 +36,10 @@ import {Jagd} from "../data/mock-jagd";
   ],
 })
 export class TaskPage implements OnInit, OnDestroy {
-  constructor(private router: Router, private gameDataService: GameDataService) {}
+  constructor(
+    private router: Router,
+    private gameDataService: GameDataService,
+  ) {}
   playerName: string = '';
   gameTime: string = '';
   rewards: string[] = [];
@@ -80,7 +90,9 @@ export class TaskPage implements OnInit, OnDestroy {
   moveToNextTask(): void {
     if (this.currentTaskIndex < this.tasks.length) {
       const taskEndTime = Date.now();
-      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000);
+      const taskDuration = Math.floor(
+        (taskEndTime - this.taskStartTime!) / 1000,
+      );
       this.totalTime += taskDuration;
 
       const currentTask = this.tasks[this.currentTaskIndex];
@@ -97,12 +109,11 @@ export class TaskPage implements OnInit, OnDestroy {
         this.endGame(
           this.gameDataService.getPlayerName(),
           this.timerDisplay,
-          this.rewards
+          this.rewards,
         );
       }
     }
   }
-
 
   endGame(playerName: string, gameTime: string, rewards: string[]): void {
     const newJagd: Jagd = {

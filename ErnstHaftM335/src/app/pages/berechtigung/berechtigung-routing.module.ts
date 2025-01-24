@@ -6,8 +6,8 @@ import { BerechtigungPage } from './berechtigung.page';
 const routes: Routes = [
   {
     path: '',
-    component: BerechtigungPage
-  }
+    component: BerechtigungPage,
+  },
 ];
 
 @NgModule({

@@ -19,9 +19,14 @@
         <ion-card-title>Kamera</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        Im Rahmen der Schnitzeljagd-App wird Zugriff auf die Kamera benötigt, um bestimmte Aufgaben zu erfüllen, wie das Scannen von QR-Codes. Bitte erlaube der App den Zugriff auf die Kamera, indem du auf „Zulassen“ tippst.
+        Im Rahmen der Schnitzeljagd-App wird Zugriff auf die Kamera benötigt, um
+        bestimmte Aufgaben zu erfüllen, wie das Scannen von QR-Codes. Bitte
+        erlaube der App den Zugriff auf die Kamera, indem du auf „Zulassen“
+        tippst.
       </ion-card-content>
-      <ion-button (click)="handleCameraPermission()" expand="full">Zulassen</ion-button>
+      <ion-button (click)="handleCameraPermission()" expand="full"
+        >Zulassen</ion-button
+      >
     </ion-card>
 
     <!-- Standort-Berechtigung -->
@@ -31,15 +36,25 @@
         <ion-card-title>Standort</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        Die Schnitzeljagd-App benötigt Zugriff auf deinen Standort, um standortbasierte Aufgaben durchzuführen. Gewähre der App bitte den Zugriff, indem du auf „Zulassen“ tippst.
+        Die Schnitzeljagd-App benötigt Zugriff auf deinen Standort, um
+        standortbasierte Aufgaben durchzuführen. Gewähre der App bitte den
+        Zugriff, indem du auf „Zulassen“ tippst.
       </ion-card-content>
-      <ion-button (click)="handleGeolocationPermission()" expand="full">Zulassen</ion-button>
+      <ion-button (click)="handleGeolocationPermission()" expand="full"
+        >Zulassen</ion-button
+      >
     </ion-card>
 
     <ion-footer>
       <ion-button expand="block" color="danger">Abbrechen</ion-button>
       <!-- Button wird nur aktiviert, wenn beide Berechtigungen erteilt wurden -->
-      <ion-button expand="block" color="success" [disabled]="!isContinueButtonEnabled()" routerLink="/task">Weiter</ion-button>
+      <ion-button
+        expand="block"
+        color="success"
+        [disabled]="!isContinueButtonEnabled()"
+        routerLink="/task"
+        >Weiter</ion-button
+      >
     </ion-footer>
   </div>
 </ion-content>

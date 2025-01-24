@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, NgZone, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import {IonButton, IonImg} from '@ionic/angular/standalone';
+import { IonButton, IonImg } from '@ionic/angular/standalone';
 import { Geolocation } from '@capacitor/geolocation';
 import { DecimalPipe } from '@angular/common';
 import { Haptics } from '@capacitor/haptics';
@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
 // Haversine formula to calculate distance
 export function haversineDistance(
   coords1: { latitude: number; longitude: number },
-  coords2: { latitude: number; longitude: number }
+  coords2: { latitude: number; longitude: number },
 ): number {
   const R = 6371e3; // Earth's radius in meters
   const lat1Rad = coords1.latitude * (Math.PI / 180);
@@ -20,9 +20,9 @@ export function haversineDistance(
   const a =
     Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
     Math.cos(lat1Rad) *
-    Math.cos(lat2Rad) *
-    Math.sin(deltaLon / 2) *
-    Math.sin(deltaLon / 2);
+      Math.cos(lat2Rad) *
+      Math.sin(deltaLon / 2) *
+      Math.sin(deltaLon / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -45,7 +45,11 @@ export class Task1Component implements OnInit, OnDestroy {
 
   @Input() moveToNextTask!: () => void;
 
-  constructor(private ngZone: NgZone, private router: Router, private alertController: AlertController) {}
+  constructor(
+    private ngZone: NgZone,
+    private router: Router,
+    private alertController: AlertController,
+  ) {}
 
   async ngOnInit() {
     try {
@@ -66,7 +70,7 @@ export class Task1Component implements OnInit, OnDestroy {
 
               this.distance = haversineDistance(
                 this.currentCoords,
-                this.fixedCoords
+                this.fixedCoords,
               );
 
               console.log('Distance to fixedCoords:', this.distance);
@@ -77,7 +81,7 @@ export class Task1Component implements OnInit, OnDestroy {
               }
             });
           }
-        }
+        },
       );
     } catch (err) {
       console.error('Failed to start watching position:', err);
@@ -102,9 +106,9 @@ export class Task1Component implements OnInit, OnDestroy {
           text: 'Weitere Aufgabe',
           handler: () => {
             this.moveToNextTask(); // Go to the next task
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     await alert.present();
   }

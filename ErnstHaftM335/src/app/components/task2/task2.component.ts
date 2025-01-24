@@ -1,10 +1,7 @@
 import { Component, OnInit, OnDestroy, NgZone, Input } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
-import {CommonModule, DecimalPipe} from '@angular/common';
-import {
-  IonImg,
-  AlertController, IonButton,
-} from '@ionic/angular/standalone';
+import { CommonModule, DecimalPipe } from '@angular/common';
+import { IonImg, AlertController, IonButton } from '@ionic/angular/standalone';
 import { haversineDistance } from '../task1/task1.component';
 import { Haptics } from '@capacitor/haptics';
 
@@ -12,7 +9,7 @@ import { Haptics } from '@capacitor/haptics';
   selector: 'app-task2',
   templateUrl: './task2.component.html',
   styleUrls: ['./task2.component.scss'],
-  imports: [IonImg, DecimalPipe, IonButton,CommonModule],
+  imports: [IonImg, DecimalPipe, IonButton, CommonModule],
 })
 export class Task2Component implements OnInit, OnDestroy {
   startCoords: { latitude: number; longitude: number } | null = null; // Starting position
@@ -24,7 +21,10 @@ export class Task2Component implements OnInit, OnDestroy {
 
   @Input() moveToNextTask!: () => void; // Input to trigger moving to the next task
 
-  constructor(private ngZone: NgZone, private alertController: AlertController) {}
+  constructor(
+    private ngZone: NgZone,
+    private alertController: AlertController,
+  ) {}
 
   async ngOnInit() {
     try {
@@ -57,7 +57,7 @@ export class Task2Component implements OnInit, OnDestroy {
               this.updateDistance();
             });
           }
-        }
+        },
       );
     } catch (err) {
       console.error('Error initializing geolocation:', err);
@@ -89,9 +89,9 @@ export class Task2Component implements OnInit, OnDestroy {
           text: 'Weitere Aufgabe',
           handler: () => {
             this.moveToNextTask(); // Go to the next task
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     await alert.present();
   }

@@ -2,7 +2,8 @@
   <h2>Mission 2: Schnitzeljagd!</h2>
   <p>Deine Aufgabe: Laufe 10 Meter und erreiche das Ziel!</p>
   <p class="distance-info">
-    Verbleibende Distanz: {{ (goalDistance - (distance || 0)) | number: '1.0-2' }} m
+    Verbleibende Distanz:
+    {{ goalDistance - (distance || 0) | number: "1.0-2" }} m
   </p>
   <ion-img src="./assets/image1.jpeg" alt="Laufen"></ion-img>
 
