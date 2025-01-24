@@ -2,12 +2,7 @@ import { Component, OnInit, OnDestroy, NgZone, Input } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { DecimalPipe } from '@angular/common';
 import {
-  IonButton,
-  IonContent,
-  IonHeader,
   IonImg,
-  IonTitle,
-  IonToolbar,
   AlertController,
 } from '@ionic/angular/standalone';
 import { haversineDistance } from '../task1/task1.component';
@@ -17,7 +12,7 @@ import { Haptics } from '@capacitor/haptics';
   selector: 'app-task2',
   templateUrl: './task2.component.html',
   styleUrls: ['./task2.component.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonImg, IonButton, DecimalPipe],
+  imports: [IonImg, DecimalPipe],
 })
 export class Task2Component implements OnInit, OnDestroy {
   startCoords: { latitude: number; longitude: number } | null = null; // Starting position
@@ -78,28 +73,26 @@ export class Task2Component implements OnInit, OnDestroy {
 
       // Check if the goal distance is reached
       if (this.distance !== null && this.distance >= this.goalDistance) {
-        this.showSuccessMessage(); // Call the function to handle UI changes
+        this.showSuccessAlert(); // Call the function to handle UI changes
       }
     }
   }
 
-  async showSuccessMessage() {
-    // Trigger vibration
+  async showSuccessAlert() {
     await this.hapticsVibrate();
 
     const alert = await this.alertController.create({
       header: 'Aufgabe abgeschlossen',
-      message: 'Sie haben Ihr Ziel erreicht!',
+      message: 'Sie haben das Ziel erreicht!',
       buttons: [
         {
-          text: 'Weiter',
+          text: 'Weitere Aufgabe',
           handler: () => {
             this.moveToNextTask(); // Go to the next task
           }
         }
       ]
     });
-
     await alert.present();
   }
 

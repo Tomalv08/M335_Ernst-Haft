@@ -7,6 +7,7 @@ import { addIcons } from 'ionicons';
 import { qrCode } from 'ionicons/icons';
 import { AlertController } from '@ionic/angular';
 import {IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle} from "@ionic/angular/standalone";
+import {Haptics} from "@capacitor/haptics";
 
 @Component({
   selector: 'app-task3',
@@ -18,7 +19,6 @@ import {IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle} from "@
     IonCardTitle,
     IonCardContent,
     IonButton,
-    // Add Ionic UI components here
   ]
 })
 export class Task3Component {
@@ -32,7 +32,6 @@ export class Task3Component {
 
   async checkTheQrCode(): Promise<void> {
     try {
-      // QR-Code scanning logic
       this.scanResult = await CapacitorBarcodeScanner.scanBarcode({
         hint: 0,
         scanInstructions: 'Halte die Kamera über den QR-Code',
@@ -44,17 +43,16 @@ export class Task3Component {
       });
 
       if (this.scanResult.ScanResult === 'M335@ICT-BZ') {
-        // Show success alert
+        await this.hapticsVibrate();
         await this.showAlert('Erfolg', 'Die Aufgabe wurde erfolgreich abgeschlossen!', [
           {
-            text: 'Weiter',
+            text: 'Weitere Aufgabe',
             handler: () => {
-              console.log('Weiter gedrückt');
+              this.moveToNextTask();
             },
           },
         ]);
       } else {
-        // Show error alert
         await this.showAlert('Fehler', 'Der QR-Code ist falsch. Bitte erneut versuchen.', [
           {
             text: 'Erneut versuchen',
@@ -66,8 +64,7 @@ export class Task3Component {
       }
     } catch (error) {
       console.error('Fehler beim Scannen:', error);
-
-      // Show scan error alert
+      await this.hapticsImpact()
       await this.showAlert('Scan-Fehler', 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.', [
         {
           text: 'OK',
@@ -86,5 +83,11 @@ export class Task3Component {
       buttons,
     });
     await alert.present();
+  }
+  async hapticsVibrate() {
+    await Haptics.vibrate();
+  }
+  async hapticsImpact(){
+    await Haptics.impact();
   }
 }

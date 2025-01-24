@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonButton, IonContent, IonHeader, IonIcon, IonTitle, IonToolbar } from "@ionic/angular/standalone";
 import {Router} from "@angular/router";
+import { GameDataService } from '../../shared/game-data.service';
 
 @Component({
   selector: 'app-endpage',
@@ -15,22 +16,21 @@ import {Router} from "@angular/router";
   ]
 })
 export class EndpagePage implements OnInit {
+  playerName: string = '';
+  gameTime: string = '';
+  rewards: string[] = [];
 
-  playerName: string = '';  // Diese Variable wird den Spielernamen speichern
-  gameTime: string = '';    // Diese Variable speichert die Gesamtzeit
-  score: string[] = [];     // Diese Variable speichert den Score (Emojis)
-  rewards: string[] = JSON.parse(localStorage.getItem('score') || '[]');
-  constructor(private router: Router) {}
+  constructor(private router: Router, private gameDataService: GameDataService) {}
 
-  ngOnInit() {
-    // Abrufen der gespeicherten Daten aus localStorage
-    this.playerName = localStorage.getItem('playerName') || 'Unbekannt';  // Spielername wird aus localStorage geladen
-    this.gameTime = localStorage.getItem('gameTime') || '0:00';           // Gesamtzeit aus localStorage laden
-    this.score = JSON.parse(localStorage.getItem('score') || '[]');
-    console.log(this.rewards);// Score (Emojis) aus localStorage laden
+  ngOnInit(): void {
+    // Fetch data from the service
+    this.playerName = this.gameDataService.getPlayerName();
+    this.gameTime = this.gameDataService.getGameTime();
+    this.rewards = this.gameDataService.getRewards();
+
   }
 
-  gotoHome() {
+  gotoHome(): void {
     this.router.navigate(['/home']);
   }
 }

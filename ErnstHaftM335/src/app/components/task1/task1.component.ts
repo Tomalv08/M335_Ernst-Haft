@@ -1,13 +1,6 @@
 import { Component, OnInit, OnDestroy, NgZone, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonImg,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular/standalone';
+import {IonImg} from '@ionic/angular/standalone';
 import { Geolocation } from '@capacitor/geolocation';
 import { DecimalPipe } from '@angular/common';
 import { Haptics } from '@capacitor/haptics';
@@ -42,10 +35,10 @@ export function haversineDistance(
   selector: 'app-task1',
   templateUrl: './task1.component.html',
   styleUrls: ['./task1.component.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonImg, IonButton, DecimalPipe],
+  imports: [IonImg,  DecimalPipe],
 })
 export class Task1Component implements OnInit, OnDestroy {
-  fixedCoords = { latitude: 47.071945403994924, longitude: 8.348885173299777 }; // Destination coordinates
+  fixedCoords = { latitude: 47.1163845, longitude: 8.3941522 };  // Destination coordinates   fixedCoords = { latitude: 47.071945403994924, longitude: 8.348885173299777 };
   currentCoords: { latitude: number; longitude: number } | null = null;
   distance: number | null = null;
   watchId: string | null = null;
@@ -98,24 +91,21 @@ export class Task1Component implements OnInit, OnDestroy {
       });
     }
   }
-
   async showSuccessAlert() {
-    // Trigger vibration
     await this.hapticsVibrate();
 
     const alert = await this.alertController.create({
       header: 'Aufgabe abgeschlossen',
-      message: 'Sie haben das Ziel erreicht.',
+      message: 'Sie haben das Ziel erreicht!',
       buttons: [
         {
-          text: 'Weiter',
+          text: 'Weitere Aufgabe',
           handler: () => {
             this.moveToNextTask(); // Go to the next task
           }
         }
       ]
     });
-
     await alert.present();
   }
 

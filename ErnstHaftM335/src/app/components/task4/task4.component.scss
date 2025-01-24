@@ -1,0 +1,57 @@
+.task-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin: 20px;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9); // Subtle gradient for a fresh look
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0070c0; // Blue for an engaging header
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .charging-state,
+  .success-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      margin: 15px 0;
+      color: #555;
+
+      &.instruction {
+        font-weight: bold;
+        color: #e63946; // Highlight "connect" instructions in red
+      }
+
+      &.success {
+        font-weight: bold;
+        color: #2a9d8f; // Green for success messages
+      }
+    }
+
+    ion-img {
+      width: 100%; // Ensure responsiveness
+      max-width: 250px; // Cap the image size for smaller devices
+      height: auto;
+      margin-top: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); // Add subtle depth
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05); // Interactive zoom on hover
+      }
+    }
+  }
+}

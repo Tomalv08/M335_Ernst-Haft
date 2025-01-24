@@ -6,11 +6,8 @@
 
 <ion-content [fullscreen]="true">
   <div class="top-section">
-    <div class="name">{{ playerName }}</div> <!-- Zeigt den Namen des Spielers an -->
-    <div class="time">{{ timerDisplay }}</div> <!-- Zeigt den Timer an -->
-    <div class="max-time">
-      Max. Zeit für diese Aufgabe: {{ tasks[currentTaskIndex]?.max_time }} Sekunden
-    </div>
+    <div class="name">{{ playerName }}</div>
+    <div class="time">{{ timerDisplay }}</div>
     <button class="cancel" ion-button (click)="cancelGame()">Abbrechen</button>
   </div>
 
@@ -29,7 +26,8 @@
     </app-task3>
     <app-task4
       *ngIf="currentTaskIndex === 3"
-      [moveToNextTask]="moveToNextTask.bind(this)">
+      [moveToNextTask]="moveToNextTask" [endGame]="endGame.bind(this)">
     </app-task4>
+
   </div>
 </ion-content>

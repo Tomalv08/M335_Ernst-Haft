@@ -1,22 +1,15 @@
 <div class="task-section">
   <h2>Aufgabe: Gerät aufladen</h2>
 
-  <div *ngIf="!isCharging">
-    <p>Bitte verbinden Sie das Gerät mit dem Ladegerät.</p>
+  <!-- Show when not charging -->
+  <div *ngIf="!isCharging" class="charging-state">
+    <p class="instruction">Bitte verbinden Sie das Gerät mit dem Ladegerät.</p>
     <ion-img src="./assets/connect-charger.jpeg" alt="Ladegerät verbinden"></ion-img>
   </div>
 
+  <!-- Show when charging -->
   <div *ngIf="isCharging" class="success-message">
-    <p class="success">Das Gerät wird aufgeladen!</p>
+    <p class="success">Super! Das Gerät wird jetzt aufgeladen.</p>
     <ion-img src="./assets/charging.webp" alt="Gerät wird aufgeladen"></ion-img>
   </div>
-
-  <!-- Button to move to next task; enabled only when charging -->
-  <ion-button
-    expand="full"
-    color="success"
-
-    (click)="moveToNextTask()">Weiter</ion-button>
 </div>
-
-<!-- [disabled]="!isCharging" -->

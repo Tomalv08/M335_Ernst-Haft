@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { JAGDS } from '../data/mock-jagd';
-import { Jagd } from '../data/mock-jagd';
+import { GameDataService } from '../../shared/game-data.service';
 
 @Component({
   selector: 'app-home',
@@ -11,52 +10,29 @@ import { Jagd } from '../data/mock-jagd';
 })
 
 export class HomePage implements OnInit {
-  jagds: Jagd[] = JAGDS;
+  jagds: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private gameDataService: GameDataService, private router: Router) {}
 
-  ngOnInit() {
-    this.sortJagdsByTime();
-    this.addPlayerToLeaderboard();
+  ngOnInit(): void {
+    this.loadLeaderboard();
   }
 
-  private timeToMinutes(time: string): number {
-    const [hours, minutes] = time.split(':').map(Number);
-    return hours * 60 + minutes;
-  }
+  loadLeaderboard(): void {
+    const playerName = this.gameDataService.getPlayerName();
+    const gameTime = this.gameDataService.getGameTime();
+    const score = this.gameDataService.getRewards();
 
-  private sortJagdsByTime() {
-    this.jagds.sort(
-      (a, b) => this.timeToMinutes(a.time) - this.timeToMinutes(b.time)
-    );
-  }
-
-  private addPlayerToLeaderboard() {
-    const playerName = localStorage.getItem('playerName');
-    console.log('Gefundener Name im Storage:', playerName); // Debug
-
-    if (playerName) {
-      const newJagd: Jagd = {
-        id: this.jagds.length + 1,
+    if (playerName && gameTime && score) {
+      this.jagds.push({
         name: playerName,
-        time: '00:00',
-        date: new Date().toISOString().split('T')[0],
-        tasks_done: 0,
-        tasks_long: 10,
-      };
-      this.jagds = [...this.jagds, newJagd]; // Array neu zuweisen
-      console.log('Aktualisiertes Leaderboard:', this.jagds); // Debug
-      this.sortJagdsByTime();
+        score: score,
+        date: new Date().toLocaleDateString(),
+        gameTime: gameTime,
+      });
     }
   }
-
-  navigateToName() {
-    this.router.navigate(['/name']);
-  }
-  navigateToTask() {
-    this.router.navigate(['/task']);
-  }
-  navigateToEnd() {
-    this.router.navigate(['/endpage']);
+  navigateToName(): void {
+    this.router.navigate(['/name']); // Navigate to the game page
   }
 }

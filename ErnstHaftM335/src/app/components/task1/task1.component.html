@@ -1,21 +1,10 @@
-<!-- Dynamic Task Section -->
-  <div class="task-section">
-    <h2>Aufgabe 1</h2>
-    <p>Laufe zum Ping Pong Tisch!</p>
-    <p class="distance">
-      Verbleibende Distanz:
-      {{ distance !== null ? (distance | number: '1.0-2') : 'Lade...' }} m
-    </p>
-    <ion-img src="./assets/image1.jpeg" alt="Ping Pong Tisch"></ion-img>
-
-    <!-- Disable the button until distance < 10 meters -->
-    <ion-button
-      expand="full"
-      color="success"
-
-      (click)="moveToNextTask()">
-      Weiter
-    </ion-button>
-  </div>
-
-<!-- [disabled]="distance === null || distance >= 10" -->
+<div class="task-section">
+  <h1>Mission 1: Bewegung!</h1>
+  <h2>Ping Pong Tisch Lauf!</h2>
+  <p>Mach dich auf den Weg zum Ping Pong Tisch – dort wartet die nächste Herausforderung auf dich!</p>
+  <p class="distance">
+    Verbleibende Distanz:
+    {{ distance !== null ? (distance | number: '1.0-2') : 'Wird geladen...' }} m
+  </p>
+  <ion-img src="./assets/image1.jpeg" alt="Ziel: Ping Pong Tisch"></ion-img>
+</div>

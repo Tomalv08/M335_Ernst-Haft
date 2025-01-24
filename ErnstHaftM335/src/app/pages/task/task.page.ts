@@ -8,6 +8,7 @@ import { Task4Component } from '../../components/task4/task4.component';
 import { NgIf } from '@angular/common';
 import { TASKS } from '../data/mock-task';
 import { Task } from '../data/mock-task';
+import { GameDataService } from '../../shared/game-data.service';
 
 @Component({
   selector: 'app-task',
@@ -27,28 +28,33 @@ import { Task } from '../data/mock-task';
   ],
 })
 export class TaskPage implements OnInit, OnDestroy {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private gameDataService: GameDataService) {}
+  playerName: string = '';
+  gameTime: string = '';
+  rewards: string[] = [];
+  timerDisplay: string = '';
+  totalTime: number = 0;
   currentTaskIndex: number = 0;
   tasks: Task[] = TASKS;
-  startTime: number | null = null; // Zeit, wenn das Spiel beginnt
-  taskStartTime: number | null = null; // Startzeit für jede Aufgabe
-  timerDisplay: string = '0:00'; // Anzeige der verstrichenen Zeit
-  timerInterval: any = null; // Referenz auf den Timer
-  totalTime: number = 0; // Gesamtzeit für alle Aufgaben
-  rewards: string[] = []; // Belohnungen für jede Aufgabe
-  playerName: string = ''; // Variable for storing the player's name
+  startTime: number | null = null; // Start time of the game
+  taskStartTime: number | null = null; // Start time of the current task
+  timerInterval: any = null;
 
   ngOnInit(): void {
     this.startGame();
+    this.playerName = this.gameDataService.getPlayerName();
+    this.gameTime = this.gameDataService.getGameTime();
+    this.rewards = this.gameDataService.getRewards();
+    this.gameDataService.setGameTime('');
   }
 
   ngOnDestroy(): void {
-    this.stopTimer(); // Timer stoppen, wenn die Komponente zerstört wird
+    this.stopTimer();
   }
 
   startGame(): void {
-    this.startTime = Date.now(); // Startzeit des Spiels
-    this.taskStartTime = Date.now(); // Startzeit der ersten Aufgabe
+    this.startTime = Date.now();
+    this.taskStartTime = Date.now();
     this.timerInterval = setInterval(() => {
       this.updateTimerDisplay();
     }, 1000);
@@ -56,7 +62,7 @@ export class TaskPage implements OnInit, OnDestroy {
 
   updateTimerDisplay(): void {
     if (this.startTime) {
-      const elapsedTime = Math.floor((Date.now() - this.taskStartTime!) / 1000); // Zeit für die aktuelle Aufgabe
+      const elapsedTime = Math.floor((Date.now() - this.startTime) / 1000); // Total game time
       const minutes = Math.floor(elapsedTime / 60);
       const seconds = elapsedTime % 60;
       this.timerDisplay = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -72,48 +78,44 @@ export class TaskPage implements OnInit, OnDestroy {
 
   moveToNextTask(): void {
     if (this.currentTaskIndex < this.tasks.length) {
-      // Berechne die Zeit für die aktuelle Aufgabe
       const taskEndTime = Date.now();
-      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000);
-      this.totalTime += taskDuration; // Addiere zur Gesamtzeit
+      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000); // Task-specific time
+      this.totalTime += taskDuration;
 
-      // Belohnung und Bestrafung je nach Aufgabe
       const currentTask = this.tasks[this.currentTaskIndex];
+
+      // Always give a watermelon for completing the task
+      this.rewards.push('🍉');
+
+      // Add a beer emoji if the task took longer than the allowed time
       if (taskDuration > currentTask.max_time) {
-        this.rewards.push('🍺'); // Bestrafung (zu lange gebraucht)
-      } else {
-        this.rewards.push('🍉'); // Belohnung (rechtzeitig geschafft)
+        this.rewards.push('🍺'); // Too slow
       }
 
       this.currentTaskIndex++;
 
-      // Setze den Timer für die nächste Aufgabe zurück
       if (this.currentTaskIndex < this.tasks.length) {
-        this.taskStartTime = Date.now(); // Startzeit für die nächste Aufgabe
+        this.taskStartTime = Date.now(); // Reset for the next task
       } else {
-        this.endGame();
+        this.endGame(this.playerName, this.timerDisplay, this.rewards);
       }
     }
   }
 
-  endGame(): void {
-    this.stopTimer(); // Timer stoppen
+  endGame(playerName: string, gameTime: string, rewards: string[]): void {
+    // Save data to the service
+    this.gameDataService.setPlayerName(playerName);
+    this.gameDataService.setGameTime(gameTime);
+    this.gameDataService.setRewards(rewards);
 
-    // Gesamtzeit speichern
-    const totalMinutes = Math.floor(this.totalTime / 60);
-    const totalSeconds = this.totalTime % 60;
-    const formattedTotalTime = `${totalMinutes}:${totalSeconds < 10 ? '0' : ''}${totalSeconds}`;
-
-    // Gesamtzeit und Score (Emojis) in localStorage speichern
-    localStorage.setItem('gameTime', formattedTotalTime);
-    localStorage.setItem('score', JSON.stringify(this.rewards));
-
-    // Navigiere zur Endseite
+    // Navigate to the end page
     this.router.navigate(['/endpage']);
   }
 
+
+
   cancelGame(): void {
-    this.stopTimer(); // Timer stoppen, wenn das Spiel abgebrochen wird
+    this.stopTimer();
     this.router.navigate(['/home']);
   }
 }

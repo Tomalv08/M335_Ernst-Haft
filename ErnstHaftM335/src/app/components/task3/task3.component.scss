@@ -1,0 +1,53 @@
+.task-box {
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #ffffff, #f7f9fc); // Light gradient for a fresh look
+  margin: 20px;
+  overflow: hidden;
+
+  ion-card-header {
+    text-align: center;
+    background-color: #0077b6; // Vibrant blue header
+    color: #fff;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+
+    ion-card-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  ion-card-content {
+    padding: 15px;
+
+    .task-description {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+
+      strong {
+        color: #e63946; // Highlighted text in red for emphasis
+      }
+    }
+
+    .camera-button {
+      background-color: #38b000; // Bright green for action button
+      color: #fff;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05); // Slight zoom on hover
+        background-color: #2a9200; // Darker green for hover effect
+      }
+
+      &:active {
+        transform: scale(0.95); // Slight shrink for click feedback
+      }
+    }
+  }
+}
