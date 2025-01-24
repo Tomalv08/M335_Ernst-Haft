@@ -1,29 +1,44 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Device } from '@capacitor/device';
 import { Haptics } from '@capacitor/haptics';
 import { AlertController } from '@ionic/angular';
 import {IonButton, IonImg} from "@ionic/angular/standalone";
 import { GameDataService } from '../../shared/game-data.service';
+<<<<<<< HEAD
 import {NgIf} from "@angular/common";
+=======
+import {CommonModule} from "@angular/common";
+>>>>>>> 16b47f9918f4c57adad21a40af3a7940cf5e7a84
 
 
 @Component({
   selector: 'app-task4',
   templateUrl: './task4.component.html',
   styleUrls: ['./task4.component.scss'],
+<<<<<<< HEAD
   imports: [
     IonImg,
     NgIf
   ]
 })
+=======
+
+  imports: [
+    IonImg,
+    IonButton,
+    CommonModule
+  ]
+
+>>>>>>> 16b47f9918f4c57adad21a40af3a7940cf5e7a84
 
 export class Task4Component implements OnInit {
   @Input() moveToNextTask!: () => void;
   @Input() endGame!: () => void;
+
   isCharging: boolean = false;
 
-  constructor(private alertController: AlertController, private router: Router, private gameDataService: GameDataService) { }
+  constructor(private alertController: AlertController, private router: Router, protected gameDataService: GameDataService) { }
 
   ngOnInit() {
     this.checkBatteryStatus();
