@@ -110,6 +110,7 @@ export class Task1Component implements OnInit, OnDestroy {
         },
       ],
     });
+    await alert.present();
   }
 
   async hapticsVibrate() {
