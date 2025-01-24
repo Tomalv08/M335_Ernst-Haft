@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Device } from '@capacitor/device';
 import { Haptics } from '@capacitor/haptics';
 import { AlertController } from '@ionic/angular';
-import {IonImg} from "@ionic/angular/standalone";
+import {IonButton, IonImg} from "@ionic/angular/standalone";
 import { GameDataService } from '../../shared/game-data.service';
+import {CommonModule} from "@angular/common";
 
 
 @Component({
@@ -12,16 +13,20 @@ import { GameDataService } from '../../shared/game-data.service';
   templateUrl: './task4.component.html',
   styleUrls: ['./task4.component.scss'],
   imports: [
-    IonImg
+    IonImg,
+    IonButton,
+    CommonModule
   ]
 })
+
 
 export class Task4Component implements OnInit {
   @Input() moveToNextTask!: () => void;
   @Input() endGame!: (playerName: string, gameTime: string, rewards: string[]) => void;
+
   isCharging: boolean = false;
 
-  constructor(private alertController: AlertController, private router: Router, private gameDataService: GameDataService) { }
+  constructor(private alertController: AlertController, private router: Router, protected gameDataService: GameDataService) { }
 
   ngOnInit() {
     this.checkBatteryStatus();
@@ -54,7 +59,7 @@ export class Task4Component implements OnInit {
               this.gameDataService.getPlayerName(),
               this.gameDataService.getGameTime(),
               this.gameDataService.getRewards()
-            ); // end
+            );
           }
         }
       ]
