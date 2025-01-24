@@ -10,21 +10,18 @@
     alt="Schnitzeljagd"
     style="height: 300px; margin:20px"
   ></ion-img>
-
-  <ion-list [inset]="true">
-    <ion-list-header>
-      <ion-label>Leaderboard</ion-label>
-    </ion-list-header>
-
-    <ion-item *ngFor="let jagd of jagds; let i = index">
-      <ion-label>
-        <h2>{{ i + 1 }}. Schnitzeljagd - {{ jagd.name }}</h2>
-        <p>Score: {{ jagd.score.join(' ') }}</p>
-        <p>Date: {{ jagd.date }}</p>
-        <p>Time: {{ jagd.gameTime }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let jagd of jagds">
+        <ion-label>
+          <h2>{{ jagd.name }}</h2>
+          <p>Datum: {{ jagd.date }}</p>
+          <p>Zeit: {{ jagd.time }}</p>
+          <p>Aufgaben abgeschlossen: {{ jagd.tasks_done }} / {{ jagd.tasks_long }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
 
   <ion-button expand="full" (click)="navigateToName()">Schnitzeljagd starten</ion-button>
 </ion-content>

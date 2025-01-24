@@ -1,37 +1,44 @@
 import { Injectable } from '@angular/core';
+import {Jagd} from "../pages/data/mock-jagd";
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameDataService {
-  private playerName: string = localStorage.getItem('playerName') || '';
-  private gameTime: string = localStorage.getItem('timerDisplay') || '';
-  private rewards: string[] = JSON.parse(localStorage.getItem('score') || '[]');
+  private playerName: string = '';
+  private rewards: string[] = [];
+  private gameTime: string = '';
+  private leaderboard: Jagd[] = []; // Array für alle Runden
 
   setPlayerName(name: string): void {
     this.playerName = name;
-    localStorage.setItem('playerName', name);
   }
 
   getPlayerName(): string {
     return this.playerName;
   }
 
+  setRewards(rewards: string[]): void {
+    this.rewards = rewards;
+  }
+
+  getRewards(): string[] {
+    return this.rewards;
+  }
+
   setGameTime(time: string): void {
     this.gameTime = time;
-    localStorage.setItem('timerDisplay', time);
   }
 
   getGameTime(): string {
     return this.gameTime;
   }
 
-  setRewards(rewards: string[]): void {
-    this.rewards = rewards;
-    localStorage.setItem('score', JSON.stringify(rewards));
+  addToLeaderboard(jagd: Jagd): void {
+    this.leaderboard.push(jagd); // Neue Runde hinzufügen
   }
 
-  getRewards(): string[] {
-    return this.rewards;
+  getLeaderboard(): Jagd[] {
+    return this.leaderboard;
   }
 }

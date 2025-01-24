@@ -9,6 +9,7 @@ import { NgIf } from '@angular/common';
 import { TASKS } from '../data/mock-task';
 import { Task } from '../data/mock-task';
 import { GameDataService } from '../../shared/game-data.service';
+import {Jagd} from "../data/mock-jagd";
 
 @Component({
   selector: 'app-task',
@@ -80,23 +81,24 @@ export class TaskPage implements OnInit, OnDestroy {
   moveToNextTask(): void {
     if (this.currentTaskIndex < this.tasks.length) {
       const taskEndTime = Date.now();
-      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000); // Task-specific time
+      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000); // Task-spezifische Zeit
       this.totalTime += taskDuration;
 
       const currentTask = this.tasks[this.currentTaskIndex];
 
-      // Always give a watermelon for completing the task
       this.rewards[this.currentTaskIndex] = '🍉'; // Ensure exactly one watermelon per task
 
-      // Add a beer emoji if the task took longer than the allowed time
+      // Zusätzliche Belohnung basierend auf der Zeit
       if (taskDuration > currentTask.max_time) {
+
         this.rewards[this.currentTaskIndex] += '🍺'; // Add beer next to the watermelon
       }
 
       this.currentTaskIndex++;
 
       if (this.currentTaskIndex < this.tasks.length) {
-        this.taskStartTime = Date.now(); // Reset for the next task
+        // Vorbereitung für die nächste Aufgabe
+        this.taskStartTime = Date.now();
       } else {
         this.endGame();
       }
@@ -116,10 +118,22 @@ export class TaskPage implements OnInit, OnDestroy {
     console.log('Game Time:', this.timerDisplay);
     console.log('Rewards:', this.rewards);
 
-    // Navigate to the end page
+
+
+  endGame(playerName: string, gameTime: string, rewards: string[]): void {
+    const newJagd: Jagd = {
+      id: Date.now(),
+      name: playerName,
+      time: gameTime,
+      date: new Date().toLocaleString(),
+      tasks_done: this.currentTaskIndex,
+      tasks_long: this.tasks.length,
+    };
+
+    this.gameDataService.addToLeaderboard(newJagd);
+
     this.router.navigate(['/endpage']);
   }
-
 
   cancelGame(): void {
     this.stopTimer();
