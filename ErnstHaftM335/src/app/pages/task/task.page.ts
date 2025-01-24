@@ -80,30 +80,24 @@ export class TaskPage implements OnInit, OnDestroy {
   moveToNextTask(): void {
     if (this.currentTaskIndex < this.tasks.length) {
       const taskEndTime = Date.now();
-      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000); // Task-spezifische Zeit
+      const taskDuration = Math.floor((taskEndTime - this.taskStartTime!) / 1000);
       this.totalTime += taskDuration;
 
       const currentTask = this.tasks[this.currentTaskIndex];
-
-      // Belohnung hinzufügen
       this.rewards.push('🍉');
-
-      // Zusätzliche Belohnung basierend auf der Zeit
       if (taskDuration > currentTask.max_time) {
-        this.rewards.push('🍺'); // Zu langsam
+        this.rewards.push('🍺');
       }
 
       this.currentTaskIndex++;
 
       if (this.currentTaskIndex < this.tasks.length) {
-        // Vorbereitung für die nächste Aufgabe
         this.taskStartTime = Date.now();
       } else {
-        // **Spiel ist zu Ende**
         this.endGame(
-          this.gameDataService.getPlayerName(), // Spielername aus GameDataService
-          this.timerDisplay,                   // Gesamtzeit des Spiels
-          this.rewards                         // Liste der Belohnungen
+          this.gameDataService.getPlayerName(),
+          this.timerDisplay,
+          this.rewards
         );
       }
     }
@@ -124,10 +118,6 @@ export class TaskPage implements OnInit, OnDestroy {
 
     this.router.navigate(['/endpage']);
   }
-
-
-
-
 
   cancelGame(): void {
     this.stopTimer();

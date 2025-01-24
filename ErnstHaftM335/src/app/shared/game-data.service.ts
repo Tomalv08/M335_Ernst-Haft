@@ -35,7 +35,7 @@ export class GameDataService {
   }
 
   addToLeaderboard(jagd: Jagd): void {
-    this.leaderboard.push(jagd); // Neue Runde hinzufügen
+    this.leaderboard.push(jagd);
   }
 
   getLeaderboard(): Jagd[] {

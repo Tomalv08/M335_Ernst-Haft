@@ -38,7 +38,7 @@ export function haversineDistance(
   imports: [IonImg, DecimalPipe, IonButton],
 })
 export class Task1Component implements OnInit, OnDestroy {
-  fixedCoords = { latitude: 47.1163845, longitude: 8.3941522 };  // Destination coordinates   fixedCoords = { latitude: 47.071945403994924, longitude: 8.348885173299777 };
+  fixedCoords = { latitude: 47.071945403994924, longitude: 8.348885173299777 }; // Destination coordinates   fixedCoords = { latitude: 47.071945403994924, longitude: 8.348885173299777 };
   currentCoords: { latitude: number; longitude: number } | null = null;
   distance: number | null = null;
   watchId: string | null = null;
