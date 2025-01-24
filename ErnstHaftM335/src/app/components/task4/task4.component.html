@@ -12,8 +12,8 @@
     <p class="success">Super! Das Gerät wird jetzt aufgeladen.</p>
     <ion-img src="./assets/charging.webp" alt="Gerät wird aufgeladen"></ion-img>
   </div>
+  <ion-button (click)="moveToNextTask()">weiter</ion-button>
   <ion-button
-    (click)="endGame(gameDataService.getPlayerName(), gameDataService.getGameTime(), gameDataService.getRewards())"
-  >weiter</ion-button>
+    (click)="endGame(gameDataService.getPlayerName(), gameDataService.getGameTime(), gameDataService.getRewards())">weiter</ion-button>
 
 </div>

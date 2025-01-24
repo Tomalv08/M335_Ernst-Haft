@@ -56,6 +56,7 @@ export class TaskPage implements OnInit, OnDestroy {
   startGame(): void {
     this.startTime = Date.now();
     this.taskStartTime = Date.now();
+    this.rewards.length = 0;
     this.timerInterval = setInterval(() => {
       this.updateTimerDisplay();
     }, 1000);
@@ -85,12 +86,12 @@ export class TaskPage implements OnInit, OnDestroy {
 
       const currentTask = this.tasks[this.currentTaskIndex];
 
-      // Belohnung hinzufügen
-      this.rewards.push('🍉');
+      this.rewards[this.currentTaskIndex] = '🍉'; // Ensure exactly one watermelon per task
 
       // Zusätzliche Belohnung basierend auf der Zeit
       if (taskDuration > currentTask.max_time) {
-        this.rewards.push('🍺'); // Zu langsam
+
+        this.rewards[this.currentTaskIndex] += '🍺'; // Add beer next to the watermelon
       }
 
       this.currentTaskIndex++;
@@ -99,15 +100,24 @@ export class TaskPage implements OnInit, OnDestroy {
         // Vorbereitung für die nächste Aufgabe
         this.taskStartTime = Date.now();
       } else {
-        // **Spiel ist zu Ende**
-        this.endGame(
-          this.gameDataService.getPlayerName(), // Spielername aus GameDataService
-          this.timerDisplay,                   // Gesamtzeit des Spiels
-          this.rewards                         // Liste der Belohnungen
-        );
+        this.endGame();
       }
     }
   }
+
+
+  endGame(): void {
+    // Save the current data into the service
+    this.gameDataService.setPlayerName(this.playerName);
+    this.gameDataService.setGameTime(this.timerDisplay); // Use the total game time
+    this.gameDataService.setRewards(this.rewards);
+
+    // Log the data (for debugging)
+    console.log('Game ended. Data saved:');
+    console.log('Player Name:', this.playerName);
+    console.log('Game Time:', this.timerDisplay);
+    console.log('Rewards:', this.rewards);
+
 
 
   endGame(playerName: string, gameTime: string, rewards: string[]): void {
@@ -124,10 +134,6 @@ export class TaskPage implements OnInit, OnDestroy {
 
     this.router.navigate(['/endpage']);
   }
-
-
-
-
 
   cancelGame(): void {
     this.stopTimer();

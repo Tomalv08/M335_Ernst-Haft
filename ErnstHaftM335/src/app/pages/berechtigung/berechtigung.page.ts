@@ -134,4 +134,7 @@ export class BerechtigungPage implements OnInit {
   isContinueButtonEnabled() {
     return this.cameraPermissionGranted && this.geolocationPermissionGranted;
   }
+  cancelGame(): void {
+    this.router.navigate(['/home']);
+  }
 }

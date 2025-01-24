@@ -18,18 +18,22 @@ import { GameDataService } from '../../shared/game-data.service';
 export class EndpagePage implements OnInit {
   playerName: string = '';
   gameTime: string = '';
-  rewards: string[] = [];
+  rewards: string[] = ['null'];
 
-  constructor(private router: Router, private gameDataService: GameDataService) {}
+  constructor(private gameDataService: GameDataService, private router: Router) {}
 
   ngOnInit(): void {
-    // Fetch data from the service
+    // Retrieve data from the service
     this.playerName = this.gameDataService.getPlayerName();
     this.gameTime = this.gameDataService.getGameTime();
     this.rewards = this.gameDataService.getRewards();
 
+    // Log the data for debugging
+    console.log('Endpage loaded with data:');
+    console.log('Player Name:', this.playerName);
+    console.log('Game Time:', this.gameTime);
+    console.log('Rewards:', this.rewards);
   }
-
   gotoHome(): void {
     this.router.navigate(['/home']);
   }

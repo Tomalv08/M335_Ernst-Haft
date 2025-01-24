@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, NgZone, Input } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import {CommonModule, DecimalPipe} from '@angular/common';
 import {
-  IonImg,
-  AlertController, IonButton,
+    IonImg,
+    AlertController, IonButton,
 } from '@ionic/angular/standalone';
 import { haversineDistance } from '../task1/task1.component';
 import { Haptics } from '@capacitor/haptics';

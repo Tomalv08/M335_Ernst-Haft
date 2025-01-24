@@ -37,8 +37,7 @@
     </ion-card>
 
     <ion-footer>
-      <ion-button expand="block" color="danger">Abbrechen</ion-button>
-      <!-- Button wird nur aktiviert, wenn beide Berechtigungen erteilt wurden -->
+      <ion-button (click)="cancelGame()" expand="block" color="danger">Abbrechen</ion-button>
       <ion-button expand="block" color="success" [disabled]="!isContinueButtonEnabled()" routerLink="/task">Weiter</ion-button>
     </ion-footer>
   </div>

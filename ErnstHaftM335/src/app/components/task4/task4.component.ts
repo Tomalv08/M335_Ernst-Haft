@@ -12,17 +12,17 @@ import {CommonModule} from "@angular/common";
   selector: 'app-task4',
   templateUrl: './task4.component.html',
   styleUrls: ['./task4.component.scss'],
+
   imports: [
     IonImg,
     IonButton,
     CommonModule
   ]
-})
 
 
 export class Task4Component implements OnInit {
   @Input() moveToNextTask!: () => void;
-  @Input() endGame!: (playerName: string, gameTime: string, rewards: string[]) => void;
+  @Input() endGame!: () => void;
 
   isCharging: boolean = false;
 
@@ -55,11 +55,7 @@ export class Task4Component implements OnInit {
         {
           text: 'Abschliessen',
           handler: () => {
-            this.endGame(
-              this.gameDataService.getPlayerName(),
-              this.gameDataService.getGameTime(),
-              this.gameDataService.getRewards()
-            );
+            this.endGame(); // end
           }
         }
       ]
