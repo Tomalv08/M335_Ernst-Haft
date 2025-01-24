@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Device } from '@capacitor/device';
 import { Haptics } from '@capacitor/haptics';
 import { AlertController } from '@ionic/angular';
-import {IonImg} from "@ionic/angular/standalone";
+import {IonButton, IonImg} from "@ionic/angular/standalone";
 import { GameDataService } from '../../shared/game-data.service';
 
 
@@ -11,14 +11,15 @@ import { GameDataService } from '../../shared/game-data.service';
   selector: 'app-task4',
   templateUrl: './task4.component.html',
   styleUrls: ['./task4.component.scss'],
-  imports: [
-    IonImg
-  ]
+    imports: [
+        IonImg,
+        IonButton
+    ]
 })
 
 export class Task4Component implements OnInit {
   @Input() moveToNextTask!: () => void;
-  @Input() endGame!: (playerName: string, gameTime: string, rewards: string[]) => void;
+  @Input() endGame!: () => void;
   isCharging: boolean = false;
 
   constructor(private alertController: AlertController, private router: Router, private gameDataService: GameDataService) { }
@@ -50,11 +51,7 @@ export class Task4Component implements OnInit {
         {
           text: 'Abschliessen',
           handler: () => {
-            this.endGame(
-              this.gameDataService.getPlayerName(),
-              this.gameDataService.getGameTime(),
-              this.gameDataService.getRewards()
-            ); // end
+            this.endGame(); // end
           }
         }
       ]

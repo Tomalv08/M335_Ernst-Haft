@@ -55,6 +55,7 @@ export class TaskPage implements OnInit, OnDestroy {
   startGame(): void {
     this.startTime = Date.now();
     this.taskStartTime = Date.now();
+    this.rewards.length = 0;
     this.timerInterval = setInterval(() => {
       this.updateTimerDisplay();
     }, 1000);
@@ -85,11 +86,11 @@ export class TaskPage implements OnInit, OnDestroy {
       const currentTask = this.tasks[this.currentTaskIndex];
 
       // Always give a watermelon for completing the task
-      this.rewards.push('🍉');
+      this.rewards[this.currentTaskIndex] = '🍉'; // Ensure exactly one watermelon per task
 
       // Add a beer emoji if the task took longer than the allowed time
       if (taskDuration > currentTask.max_time) {
-        this.rewards.push('🍺'); // Too slow
+        this.rewards[this.currentTaskIndex] += '🍺'; // Add beer next to the watermelon
       }
 
       this.currentTaskIndex++;
@@ -97,21 +98,27 @@ export class TaskPage implements OnInit, OnDestroy {
       if (this.currentTaskIndex < this.tasks.length) {
         this.taskStartTime = Date.now(); // Reset for the next task
       } else {
-        this.endGame(this.playerName, this.timerDisplay, this.rewards);
+        this.endGame();
       }
     }
   }
 
-  endGame(playerName: string, gameTime: string, rewards: string[]): void {
-    // Save data to the service
-    this.gameDataService.setPlayerName(playerName);
-    this.gameDataService.setGameTime(gameTime);
-    this.gameDataService.setRewards(rewards);
+
+  endGame(): void {
+    // Save the current data into the service
+    this.gameDataService.setPlayerName(this.playerName);
+    this.gameDataService.setGameTime(this.timerDisplay); // Use the total game time
+    this.gameDataService.setRewards(this.rewards);
+
+    // Log the data (for debugging)
+    console.log('Game ended. Data saved:');
+    console.log('Player Name:', this.playerName);
+    console.log('Game Time:', this.timerDisplay);
+    console.log('Rewards:', this.rewards);
 
     // Navigate to the end page
     this.router.navigate(['/endpage']);
   }
-
 
 
   cancelGame(): void {
